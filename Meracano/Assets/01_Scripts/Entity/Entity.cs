@@ -1,20 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public LayerMask TargetLayer;
+
+    private float speed = 5;
+
     private int _maxDetectEnemy = 5;
     private Collider2D[] _targetColliders;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _targetColliders = new Collider2D[_maxDetectEnemy];
+        Debug.Log($"_targetColliders initialized with size: {_targetColliders.Length}");
     }
 
     public void MoveToTargetPos(Transform _targetPos)
     {
-        
+        StartCoroutine(MoveToTarget(_targetPos));
+    }
+
+    private IEnumerator MoveToTarget(Transform _targetPos)
+    {
+        while (transform.position != _targetPos.position)
+        {
+            // MoveTowards를 사용하여 일정 속도로 목표 위치로 이동
+            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, speed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     public void AttackTarget(Entity _target)

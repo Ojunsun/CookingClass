@@ -8,8 +8,9 @@ public class Enemy : Entity
 {
     private Dictionary<Type, IEnemyComponent> _components;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _components = new Dictionary<Type, IEnemyComponent>();
         GetComponentsInChildren<IEnemyComponent>().ToList().ForEach(compo => _components.Add(compo.GetType(), compo));
 

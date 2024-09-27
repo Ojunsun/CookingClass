@@ -8,12 +8,9 @@ public class EnemyMovement : MonoBehaviour, IEnemyComponent
     private Enemy _enemy;
     private Entity _target;
 
-    [SerializeField]
-    private LayerMask _targetLayer;
-
     public void Initialize(Enemy enemy)
     {
-        _enemy = enemy;
+        _enemy = enemy ;
     }
 
     private void OnEnable()
@@ -23,7 +20,7 @@ public class EnemyMovement : MonoBehaviour, IEnemyComponent
 
     private void OnBattleStartEventHandler()
     {
-        _target = _enemy.FindNearestTarget<Entity>(50f, _targetLayer);
+        _target = _enemy.FindNearestTarget<Entity>(50f, _enemy.TargetLayer);
 
         _enemy.MoveToTargetPos(_target.transform);
     }
