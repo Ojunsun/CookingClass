@@ -12,8 +12,18 @@ public class Entity : MonoBehaviour
     private int _maxDetectEnemy = 5;
     private Collider2D[] _targetColliders;
 
+    public EntityStatSO Stat { get; protected set; }
+
+    #region 컴포넌트
+    public DamageCaster DamageCasterCompo { get; protected set; }
+    public Health HealthCompo { get; protected set; }
+    #endregion
+
     protected virtual void Awake()
     {
+        DamageCasterCompo = GetComponent<DamageCaster>();
+        HealthCompo = GetComponent<Health>();
+
         _targetColliders = new Collider2D[_maxDetectEnemy];
         Debug.Log($"_targetColliders initialized with size: {_targetColliders.Length}");
     }
@@ -25,17 +35,23 @@ public class Entity : MonoBehaviour
 
     private IEnumerator MoveToTarget(Transform _targetPos)
     {
+        var targetDis = Stat.attackDistance;
         while (transform.position != _targetPos.position)
         {
             // MoveTowards를 사용하여 일정 속도로 목표 위치로 이동
             transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, speed * Time.deltaTime);
             yield return null;
+
+            if(targetDis >= Vector3.Distance(_targetPos.position, transform.position))
+            {
+                AttackTarget();
+            }
         }
     }
 
-    public void AttackTarget(Entity _target)
+    public void AttackTarget()
     {
-
+        DamageCasterCompo.CastMeleeDamage();
     }
 
     public T FindNearestTarget<T>(float checkRange, LayerMask mask) where T : Entity
