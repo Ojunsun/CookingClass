@@ -12,7 +12,7 @@ public class Entity : MonoBehaviour
     private int _maxDetectEnemy = 5;
     private Collider2D[] _targetColliders;
 
-    public EntityStatSO Stat { get; protected set; }
+    [field:SerializeField] public EntityStatSO Stat { get; protected set; }
 
     #region ÄÄÆ÷³ÍÆ®
     public DamageCaster DamageCasterCompo { get; protected set; }

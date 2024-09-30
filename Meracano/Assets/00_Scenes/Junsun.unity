@@ -288,6 +288,7 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 64
+  <Stat>k__BackingField: {fileID: 11400000, guid: 47c1eca63a2b1d04696f43d80d64b5e6, type: 2}
 --- !u!212 &146774123
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -525,6 +526,7 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 0
+  <Stat>k__BackingField: {fileID: 0}
 --- !u!58 &640973815
 CircleCollider2D:
   m_ObjectHideFlags: 0
