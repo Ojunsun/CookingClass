@@ -21,8 +21,10 @@ public class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
-        DamageCasterCompo = GetComponent<DamageCaster>();
+        DamageCasterCompo = GetComponentInChildren<DamageCaster>();
         HealthCompo = GetComponent<Health>();
+
+        HealthCompo?.SetMaxHealth(Stat.maxHp);
 
         _targetColliders = new Collider2D[_maxDetectEnemy];
         Debug.Log($"_targetColliders initialized with size: {_targetColliders.Length}");
@@ -36,16 +38,19 @@ public class Entity : MonoBehaviour
     private IEnumerator MoveToTarget(Transform _targetPos)
     {
         var targetDis = Stat.attackDistance;
-        while (transform.position != _targetPos.position)
-        {
-            // MoveTowards를 사용하여 일정 속도로 목표 위치로 이동
-            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, speed * Time.deltaTime);
-            yield return null;
 
-            if(targetDis >= Vector3.Distance(_targetPos.position, transform.position))
+        while (true)
+        {
+            float distanceToTarget = Vector3.Distance(transform.position, _targetPos.position);
+            
+            if (distanceToTarget <= targetDis)
             {
                 AttackTarget();
+                yield break;
             }
+            
+            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, speed * Time.deltaTime);
+            yield return null;
         }
     }
 

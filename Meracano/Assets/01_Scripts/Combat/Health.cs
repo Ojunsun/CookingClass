@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private float maxHealth;
-    private float currentHealth;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float currentHealth;
 
     private event Action OnHit;
     private event Action OnDead;
 
-    private Entity _onwer;
-
-    public void SetMaxHealth()
+    public void SetMaxHealth(float _maxHealth)
     {
-        maxHealth = currentHealth = _onwer.Stat.maxHp;
+        maxHealth = currentHealth = _maxHealth;
     }
 
     public void ApplyDamage(float damage)

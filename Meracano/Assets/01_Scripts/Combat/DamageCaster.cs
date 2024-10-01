@@ -5,7 +5,6 @@ using UnityEngine;
 public class DamageCaster : MonoBehaviour
 {
     private Entity _onwer;
-    private Health _health;
 
     private void Awake()
     {
@@ -14,6 +13,6 @@ public class DamageCaster : MonoBehaviour
 
     public void CastMeleeDamage()
     {
-        _health.ApplyDamage(_onwer.Stat.damage);
+        _onwer.HealthCompo.ApplyDamage(_onwer.Stat.damage);
     }
 }
