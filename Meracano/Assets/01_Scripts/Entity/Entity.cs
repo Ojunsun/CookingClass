@@ -6,7 +6,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public LayerMask TargetLayer;
-
+    
     private float speed = 5;
 
     private int _maxDetectEnemy = 5;
@@ -28,35 +28,6 @@ public class Entity : MonoBehaviour
 
         _targetColliders = new Collider2D[_maxDetectEnemy];
         Debug.Log($"_targetColliders initialized with size: {_targetColliders.Length}");
-    }
-
-    public void MoveToTargetPos(Transform _targetPos)
-    {
-        StartCoroutine(MoveToTarget(_targetPos));
-    }
-
-    private IEnumerator MoveToTarget(Transform _targetPos)
-    {
-        var targetDis = Stat.attackDistance;
-
-        while (true)
-        {
-            float distanceToTarget = Vector3.Distance(transform.position, _targetPos.position);
-            
-            if (distanceToTarget <= targetDis)
-            {
-                AttackTarget();
-                yield break;
-            }
-            
-            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, speed * Time.deltaTime);
-            yield return null;
-        }
-    }
-
-    public void AttackTarget()
-    {
-        DamageCasterCompo.CastMeleeDamage();
     }
 
     public T FindNearestTarget<T>(float checkRange, LayerMask mask) where T : Entity
