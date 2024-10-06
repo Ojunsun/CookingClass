@@ -8,8 +8,9 @@ public class Health : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
 
-    private event Action OnHit;
-    private event Action OnDead;
+    public event Action OnHit;
+    public event Action OneMoreHit;
+    public event Action OnDead;
 
     public void SetMaxHealth(float _maxHealth)
     {
@@ -23,8 +24,8 @@ public class Health : MonoBehaviour
         Mathf.Clamp(currentHealth, 0, maxHealth);
 
         if(Mathf.Approximately(currentHealth, 0))
-        {
             OnDead?.Invoke();
-        }
+        else
+            OneMoreHit?.Invoke();
     }
 }
