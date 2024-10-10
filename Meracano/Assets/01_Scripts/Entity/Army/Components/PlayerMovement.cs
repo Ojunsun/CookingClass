@@ -1,18 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour, IEnemyComponent
+public class PlayerMovement : MonoBehaviour, IPlayerComponent
 {
-    private Enemy _enemy;
+    private Player _player;
     private Entity _target;
-    private EnemyAttack _enemyAttack;
+    private PlayerAttack _playerAttack;
 
-    public void Initialize(Enemy enemy)
+    public void Initialize(Player player)
     {
-        _enemy = enemy;
-        _enemyAttack = enemy.GetCompo<EnemyAttack>();
+        _player = player;
+        _playerAttack = player.GetCompo<PlayerAttack>();
     }
 
     private void OnEnable()
@@ -22,7 +21,7 @@ public class EnemyMovement : MonoBehaviour, IEnemyComponent
 
     private void OnBattleStartEventHandler()
     {
-        _target = _enemy.FindNearestTarget<Entity>(50f, _enemy.TargetLayer);
+        _target = _player.FindNearestTarget<Entity>(50f, _player.TargetLayer);
 
         MoveToTargetPos(_target.transform);
     }
@@ -34,7 +33,7 @@ public class EnemyMovement : MonoBehaviour, IEnemyComponent
 
     private IEnumerator MoveToTarget(Transform _targetPos)
     {
-        var targetDis = _enemy.Stat.attackDistance;
+        var targetDis = _player.Stat.attackDistance;
 
         while (true)
         {
@@ -42,11 +41,11 @@ public class EnemyMovement : MonoBehaviour, IEnemyComponent
 
             if (distanceToTarget <= targetDis)
             {
-                _enemyAttack.AttackTarget();
+                _playerAttack.AttackTarget();
                 yield break;
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _enemy.Stat.moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _player.Stat.moveSpeed * Time.deltaTime);
             yield return null;
         }
     }

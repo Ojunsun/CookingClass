@@ -10,5 +10,6 @@ public class EntityStatSO : ScriptableObject
     public float maxHp;
     public float damage;
     public float moveSpeed;
+    public float attackDistance;
 }
     

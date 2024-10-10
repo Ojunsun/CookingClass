@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour
+public class EnemyAttack : MonoBehaviour, IEnemyComponent
 {
-    // Start is called before the first frame update
-    void Start()
+    private Enemy _enemy;
+
+    public void Initialize(Enemy enemy)
     {
-        
+        _enemy = enemy;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AttackTarget()
     {
-        
+        _enemy.DamageCasterCompo.CastMeleeDamage();
     }
 }
