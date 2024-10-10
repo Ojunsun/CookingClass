@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class PositionPrefab : PoolableMono
 {
+    private Player curPlayer;
+    private SpriteRenderer sr;
+
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
+
     // player
     public override void Init()
     {
-        transform.position = Vector3.zero;
+        curPlayer = null;
+        transform.localPosition = Vector3.zero;
+    }
+
+    public void SetPlayer(Player p)
+    {
+        curPlayer = p;
+        curPlayer.SetTransform(transform);
     }
 
     public void SetTransform(float x, float y)
@@ -15,23 +30,12 @@ public class PositionPrefab : PoolableMono
         transform.position = new Vector3(x, y, 0);
     }
 
-    private void OnMouseEnter()
+    public void MouseEnter()
     {
-        print(transform.position);
+        sr.color = Color.red;
     }
-
-    private void OnMouseExit()
+    public void MouseExit()
     {
-
-    }
-
-    private void OnMouseDown()
-    {
-        
-    }
-
-    private void OnMouseUp()
-    {
-        
+        sr.color = Color.white;
     }
 }   
