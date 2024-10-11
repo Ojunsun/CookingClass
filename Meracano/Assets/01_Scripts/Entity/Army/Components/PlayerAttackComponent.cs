@@ -12,16 +12,6 @@ public class PlayerAttackComponent : MonoBehaviour, IPlayerComponent
         _player = player;
     }
 
-    private void Start()
-    {
-        _player.HealthCompo.OneMoreHit += AttackTargetHandler;
-    }
-
-    private void AttackTargetHandler()
-    {
-        AttackTarget();
-    }
-
     public void AttackTarget()
     {
         _player.DamageCasterCompo.CastMeleeDamage();
