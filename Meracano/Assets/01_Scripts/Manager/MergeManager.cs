@@ -6,7 +6,7 @@ public class MergeManager : MonoSingleton<MergeManager>
 {
     public void FindCanMergePlayer(Player player) // 레베ㄹ 같ㅇㅡㄴ거 찾ㅇㅏㅈㅜㄴㅡㄴ 함ㅅㅜ
     {
-        // 플레이어와 같은 레벨을 모두 찾아줌
+
     }
 
     public void MergePlayer(Player player1, Player player2)

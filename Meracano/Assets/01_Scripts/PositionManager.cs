@@ -5,14 +5,10 @@ using UnityEngine;
 
 public class PositionManager : MonoBehaviour
 {
-    private int height = 7;
-    private int width = 5;
+    [SerializeField] private int height = 7;
+    [SerializeField] private int width = 5;
 
     private List<PositionPrefab> posList;
-
-    private int minCnt = 0;
-    private int curCnt = 0;
-    private int maxCnt = 0;
 
     private void Awake()
     {
@@ -28,16 +24,14 @@ public class PositionManager : MonoBehaviour
         {
             for(int j = 0; j < width; ++j)
             {
-                PositionPrefab pref = PoolManager.Instance.Pop("PositionPrefab") as PositionPrefab;
+                PositionPrefab positionPrefab = PoolManager.Instance.Pop("PositionPrefab") as PositionPrefab;
 
-                pref.transform.SetParent(this.transform);
-                posList.Add(pref);
+                positionPrefab.transform.SetParent(this.transform);
+                posList.Add(positionPrefab);
 
-                pref.SetTransform(startPosX + j * 1.1f, startPosY - i * 1.3f);
+                positionPrefab.SetTransform(startPosX + j * 1.1f, startPosY - i * 1.3f);
             }
         }
-
-        maxCnt = posList.Count;
     }
 
     private void Update()
@@ -48,9 +42,31 @@ public class PositionManager : MonoBehaviour
         }
     }
 
+    public PositionPrefab FindClosestPosition()
+    {
+        foreach(var pos in posList)
+        {
+            if (pos.transform.GetComponentInChildren<Player>() == null)
+            {
+                return pos;
+            }
+        }
+
+        return null;
+    }
+
     private void CreatePlayer()
     {
-        Player pref = PoolManager.Instance.Pop("Army") as Player;
-        posList[curCnt++].SetPlayer(pref);
+        PositionPrefab closestPositionPref = FindClosestPosition();
+
+        if(closestPositionPref == null)
+        {
+            Debug.Log("³¡");
+        }
+        else
+        {
+            Player newPlayerPrefab = PoolManager.Instance.Pop("Army") as Player;
+            closestPositionPref.SetPlayer(newPlayerPrefab);
+        }
     }
 }

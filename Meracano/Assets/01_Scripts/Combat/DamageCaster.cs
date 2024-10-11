@@ -13,6 +13,6 @@ public class DamageCaster : MonoBehaviour
 
     public void CastMeleeDamage()
     {
-        _onwer.HealthCompo.ApplyDamage(_onwer.Stat.damage);
+        _onwer.HealthCompo.ApplyDamage(_onwer.Stat.Damage);
     }
 }

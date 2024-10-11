@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerComponent
 
     private IEnumerator MoveToTarget(Transform _targetPos)
     {
-        var targetDis = _player.Stat.attackDistance;
+        var targetDis = _player.Stat.AttackDistance;
 
         while (true)
         {
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerComponent
                 yield break;
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _player.Stat.moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _player.Stat.MoveSpeed * Time.deltaTime);
             yield return null;
         }
     }

@@ -11,11 +11,11 @@ public class DragManager : MonoSingleton<DragManager>
 
     private void Update()
     {
-        CheckPositionPref();
+        CheckPositionPref();// OnBattleEndEvent 실행되면 이게 계속 실행되어야 함
 
         if (Input.GetMouseButtonDown(0))
         { 
-            StartDrag(); // OnBattleEndEvent 실행되면 이게 실행되어야 할 것 같다
+            StartDrag(); 
         }
 
         if (isDragging && draggedPlayer != null)
@@ -57,7 +57,6 @@ public class DragManager : MonoSingleton<DragManager>
                 // 두 개가 다르고 + 레벨이 다를 경우
                 else //
                 {
-                    Debug.Log("dd");
                     currentPointedPosition?.SetPlayer(draggedPlayer);
                 }
             }

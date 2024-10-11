@@ -24,7 +24,7 @@ public class Entity : PoolableMono
         DamageCasterCompo = GetComponentInChildren<DamageCaster>();
         HealthCompo = GetComponent<Health>();
 
-        HealthCompo?.SetMaxHealth(Stat.maxHp);
+        HealthCompo?.SetMaxHealth(Stat.MaxHP);
 
         _targetColliders = new Collider2D[_maxDetectEnemy];
         Debug.Log($"_targetColliders initialized with size: {_targetColliders.Length}");
