@@ -38,25 +38,28 @@ public class DragManager : MonoSingleton<DragManager>
 
     private void GetObjectInMousePosition()
     {
+        if(draggedPlayer == null)
+        {
+            return;
+        }
+
         Vector3 pos = CheckMousePosition();
         Collider2D[] colliders = Physics2D.OverlapPointAll(pos);
 
         foreach (var col in colliders)
         {
-            if(col.TryGetComponent<Player>(out Player mergePlayer))
+            if(col.TryGetComponent<Player>(out Player mergePlayer)) // 무조건 draggedplayer가 감지가 됨
             {
                 if(mergePlayer != draggedPlayer) // 두 개가 다르고 + 레벨이 같을 경우
                 {
-                    Debug.Log("Merge"); // 머지
+                    MergeManager.Instance.MergePlayer(draggedPlayer, mergePlayer);
                 }
-                else // 레벨이 다른 플레이어가 있을 경우
+                // 두 개가 다르고 + 레벨이 다를 경우
+                else //
                 {
-
+                    Debug.Log("dd");
+                    currentPointedPosition?.SetPlayer(draggedPlayer);
                 }
-            }
-            else
-            {
-                currentPointedPosition.SetPlayer(draggedPlayer);
             }
         }
     }
@@ -65,6 +68,15 @@ public class DragManager : MonoSingleton<DragManager>
     {
         Vector3 pos = CheckMousePosition();
         Collider2D[] colliders = Physics2D.OverlapPointAll(pos);
+
+        if (colliders.Length <= 0)
+        {
+            currentPointedPosition?.MouseExit();
+            currentPointedPosition = null;
+
+            return;
+        }
+
         foreach (var col in colliders)
         {
             if (col.TryGetComponent<PositionPrefab>(out PositionPrefab pointedPos))
@@ -75,7 +87,6 @@ public class DragManager : MonoSingleton<DragManager>
                 currentPointedPosition?.MouseExit();
 
                 currentPointedPosition = pointedPos;
-                Debug.Log("Pos");
             }
         }
     }
@@ -90,6 +101,8 @@ public class DragManager : MonoSingleton<DragManager>
             isDragging = true;
             draggedPlayer = p;
         }
+
+        MergeManager.Instance.FindCanMergePlayer(draggedPlayer);
     }
 
     private void DragPlayer()
@@ -102,14 +115,7 @@ public class DragManager : MonoSingleton<DragManager>
     private void EndDrag()
     {
         GetObjectInMousePosition();
-
         isDragging = false;
         draggedPlayer = null;
-    }
-
-    public void TryMergePlayer()
-    {
-        if (isDragging) return;
-        Debug.Log("Merge");
     }
 }
