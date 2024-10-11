@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
-    public Camera mainCam;
+    public Camera MainCam;
     public PoolingListSO PoolingList;
 
     private void Awake()
     {
-        mainCam = Camera.main;
+        MainCam = Camera.main;
 
         MakePool();
     }

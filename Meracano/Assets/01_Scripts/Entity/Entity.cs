@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class Entity : PoolableMono
 {
     public LayerMask TargetLayer;
     
@@ -53,5 +53,10 @@ public class Entity : MonoBehaviour
             }
         }
         return target;
+    }
+
+    public override void Init()
+    {
+
     }
 }
