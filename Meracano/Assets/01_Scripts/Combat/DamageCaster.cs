@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class DamageCaster : MonoBehaviour
 {
     private Entity _onwer;
+
 
     private void Awake()
     {
@@ -13,6 +15,8 @@ public class DamageCaster : MonoBehaviour
 
     public void CastMeleeDamage()
     {
-        _onwer.HealthCompo.ApplyDamage(_onwer.Stat.Damage);
+        var target = _onwer.FindNearestTarget<Entity>(50f, _onwer.TargetLayer);
+
+        target.HealthCompo.ApplyDamage(_onwer.Stat.damage);
     }
 }

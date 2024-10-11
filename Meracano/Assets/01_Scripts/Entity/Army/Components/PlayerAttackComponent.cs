@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour, IPlayerComponent
+public class PlayerAttackComponent : MonoBehaviour, IPlayerComponent
 {
     private Player _player;
 
