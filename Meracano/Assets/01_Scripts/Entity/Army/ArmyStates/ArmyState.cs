@@ -17,7 +17,7 @@ public class ArmyState
         _army = army;
         _stateMachine = stateMachine;
         _animBoolHash = Animator.StringToHash(animBoolName);
-        _anim = _army.GetCompo<EnemyAnimator>().Anim;
+        _anim = _army.GetCompo<PlayerAnimator>().Anim;
     }
 
     public virtual void Enter()

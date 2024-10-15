@@ -19,11 +19,22 @@ public class ArmyMelee : Player
         base.Awake();
         stateDictionary = new Dictionary<ArmyMeleeState, ArmyState>(){
             {ArmyMeleeState.Idle, new ArmyMeleeIdle(this, StateMachine, "Idle") },
+            {ArmyMeleeState.Move, new ArmyMeleeMove(this, StateMachine, "Move") },
         };
+    }
+
+    private void Start()
+    {
+        StateMachine.Inirialize(stateDictionary[ArmyMeleeState.Idle]);
     }
 
     public override ArmyState GetState(Enum enumType)
     {
-        throw new NotImplementedException();
+        var state = (ArmyMeleeState)enumType;
+        if(stateDictionary.TryGetValue(state, out ArmyState armyState))
+        {
+            return armyState;
+        }
+        return null;
     }
 }

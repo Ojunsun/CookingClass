@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnimator : MonoBehaviour, IEnemyComponent
+public class PlayerAnimator : MonoBehaviour, IPlayerComponent
 {
-    private Enemy _enemy;
+    private Player _player;
     public Animator Anim { get; private set; }
 
-    public void Initialize(Enemy enemy)
+    public void Initialize(Player player)
     {
-        _enemy = enemy;
+        _player = player;
         Anim = GetComponent<Animator>();
     }
 }
