@@ -177,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 146774124}
   - component: {fileID: 146774123}
-  - component: {fileID: 146774122}
+  - component: {fileID: 146774127}
   - component: {fileID: 146774121}
   - component: {fileID: 146774120}
   - component: {fileID: 146774119}
@@ -274,22 +274,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed5a6ed68eb2da4c934d3f8f62effd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &146774122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146774118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 202ed71f2946f6c43a26234e73ade069, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  <Stat>k__BackingField: {fileID: 11400000, guid: 47c1eca63a2b1d04696f43d80d64b5e6, type: 2}
 --- !u!212 &146774123
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -384,6 +368,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c4207cb4727944e8efdb42e01a71db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &146774127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146774118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268dc7a5bb1088d419d9c9a4993d4bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  <Stat>k__BackingField: {fileID: 11400000, guid: 47c1eca63a2b1d04696f43d80d64b5e6, type: 2}
 --- !u!1 &264193654
 GameObject:
   m_ObjectHideFlags: 0

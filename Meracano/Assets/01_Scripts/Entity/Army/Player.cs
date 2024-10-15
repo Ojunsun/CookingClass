@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Player : Entity
+public abstract class Player : Entity
 {
+    public ArmyStateMachine StateMachine { get; private set; }
     private Dictionary<Type, IPlayerComponent> _components;
 
     protected override void Awake()
@@ -37,4 +38,6 @@ public class Player : Entity
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = UnityEngine.Random.ColorHSV();
     }
+
+    public abstract ArmyState GetState(Enum enumType);
 }
