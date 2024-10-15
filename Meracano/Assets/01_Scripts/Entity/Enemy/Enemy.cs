@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Enemy : Entity
+public abstract class Enemy : Entity
 {
+    public EnemyStateMachine StateMachine { get; private set; }
     private Dictionary<Type, IEnemyComponent> _components;
 
     protected override void Awake()
     {
         base.Awake();
+        StateMachine = new EnemyStateMachine();
         _components = new Dictionary<Type, IEnemyComponent>();
         GetComponentsInChildren<IEnemyComponent>().ToList().ForEach(compo => _components.Add(compo.GetType(), compo));
 
@@ -25,4 +27,7 @@ public class Enemy : Entity
         }
         return default;
     }
+
+    public abstract EnemyState GetState(Enum enumType);
+
 }

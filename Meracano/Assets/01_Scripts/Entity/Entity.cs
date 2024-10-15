@@ -27,7 +27,6 @@ public class Entity : PoolableMono
         HealthCompo?.SetMaxHealth(Stat.MaxHP);
 
         _targetColliders = new Collider2D[_maxDetectEnemy];
-        Debug.Log($"_targetColliders initialized with size: {_targetColliders.Length}");
     }
 
     public T FindNearestTarget<T>(float checkRange, LayerMask mask) where T : Entity
@@ -53,6 +52,13 @@ public class Entity : PoolableMono
             }
         }
         return target;
+    }
+
+    public void LookTarget()
+    { 
+        var target = FindNearestTarget<Entity>(50f, TargetLayer);
+
+        transform.LookAt(target.transform);
     }
 
     public override void Init()
