@@ -34,7 +34,7 @@ public class EnemyMovement : MonoBehaviour, IEnemyComponent
 
     private IEnumerator MoveToTarget(Transform _targetPos)
     {
-        var targetDis = _enemy.Stat.attackDistance;
+        var targetDis = _enemy.Stat.AttackDistance;
 
         while (true)
         {
@@ -46,7 +46,7 @@ public class EnemyMovement : MonoBehaviour, IEnemyComponent
                 yield break;
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _enemy.Stat.moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _enemy.Stat.MoveSpeed * Time.deltaTime);
             yield return null;
         }
     }

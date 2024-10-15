@@ -11,11 +11,11 @@ public class DragManager : MonoSingleton<DragManager>
 
     private void Update()
     {
-        CheckPositionPref();
+        CheckPositionPref();// OnBattleEndEvent 실행되면 이게 계속 실행되어야 함
 
         if (Input.GetMouseButtonDown(0))
         { 
-            StartDrag(); // OnBattleEndEvent 실행되면 이게 실행되어야 할 것 같다
+            StartDrag(); 
         }
 
         if (isDragging && draggedPlayer != null)
@@ -43,8 +43,7 @@ public class DragManager : MonoSingleton<DragManager>
             return;
         }
 
-        Vector3 pos = CheckMousePosition();
-        Collider2D[] colliders = Physics2D.OverlapPointAll(pos);
+        Collider2D[] colliders = Physics2D.OverlapPointAll(CheckMousePosition());
 
         foreach (var col in colliders)
         {
@@ -57,7 +56,6 @@ public class DragManager : MonoSingleton<DragManager>
                 // 두 개가 다르고 + 레벨이 다를 경우
                 else //
                 {
-                    Debug.Log("dd");
                     currentPointedPosition?.SetPlayer(draggedPlayer);
                 }
             }
@@ -66,10 +64,9 @@ public class DragManager : MonoSingleton<DragManager>
 
     private void CheckPositionPref()
     {
-        Vector3 pos = CheckMousePosition();
-        Collider2D[] colliders = Physics2D.OverlapPointAll(pos);
+        Collider2D[] colliders = Physics2D.OverlapPointAll(CheckMousePosition());
 
-        if (colliders.Length <= 0)
+        if (colliders.Length <= 0 && draggedPlayer == null)
         {
             currentPointedPosition?.MouseExit();
             currentPointedPosition = null;
@@ -107,9 +104,7 @@ public class DragManager : MonoSingleton<DragManager>
 
     private void DragPlayer()
     {
-        Vector3 pos = CheckMousePosition();
-        pos.z = 0;
-        draggedPlayer.transform.position = pos;
+        draggedPlayer.transform.position = CheckMousePosition();
     }
 
     private void EndDrag()
