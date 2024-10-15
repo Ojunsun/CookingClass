@@ -7,6 +7,7 @@ public class DragManager : MonoSingleton<DragManager>
     private bool isDragging;
 
     private Player draggedPlayer;
+    private PositionPrefab firstPointedPosition;
     private PositionPrefab currentPointedPosition;
 
     private void Update()
@@ -49,12 +50,11 @@ public class DragManager : MonoSingleton<DragManager>
         {
             if(col.TryGetComponent<Player>(out Player mergePlayer)) // 무조건 draggedplayer가 감지가 됨
             {
-                if(mergePlayer != draggedPlayer) // 두 개가 다르고 + 레벨이 같을 경우
+                if(mergePlayer != draggedPlayer)
                 {
-                    MergeManager.Instance.MergePlayer(draggedPlayer, mergePlayer);
+                    SpawnManager.Instance.MergePlayer(draggedPlayer, mergePlayer, firstPointedPosition, currentPointedPosition);
                 }
-                // 두 개가 다르고 + 레벨이 다를 경우
-                else //
+                else
                 {
                     currentPointedPosition?.SetPlayer(draggedPlayer);
                 }
@@ -97,9 +97,11 @@ public class DragManager : MonoSingleton<DragManager>
         {
             isDragging = true;
             draggedPlayer = p;
-        }
 
-        MergeManager.Instance.FindCanMergePlayer(draggedPlayer);
+            firstPointedPosition = p.GetComponentInParent<PositionPrefab>();
+
+            //SpawnManager.Instance.FindCanMergePlayer(draggedPlayer);
+        }
     }
 
     private void DragPlayer()
@@ -110,6 +112,7 @@ public class DragManager : MonoSingleton<DragManager>
     private void EndDrag()
     {
         GetObjectInMousePosition();
+
         isDragging = false;
         draggedPlayer = null;
     }

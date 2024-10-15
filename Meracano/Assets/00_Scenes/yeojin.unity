@@ -123,50 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &319861164
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 319861165}
-  - component: {fileID: 319861166}
-  m_Layer: 0
-  m_Name: MergeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &319861165
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319861164}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1377524491}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &319861166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319861164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7506b46df09caf44b4057e24eda735a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &567884809
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +270,7 @@ GameObject:
   - component: {fileID: 1333229287}
   - component: {fileID: 1333229288}
   m_Layer: 0
-  m_Name: PositionManager
+  m_Name: SpawnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -347,8 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372a4e9ec4b677a48a1bf87977321f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 7
-  width: 5
+  PlayerSO: {fileID: 11400000, guid: 30132a2c4538bb047a279d57e69777dd, type: 2}
 --- !u!1 &1377524490
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +335,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1069034210}
-  - {fileID: 319861165}
   - {fileID: 1333229287}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

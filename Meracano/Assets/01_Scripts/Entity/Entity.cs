@@ -14,6 +14,8 @@ public class Entity : PoolableMono
 
     [field:SerializeField] public EntityStatSO Stat { get; protected set; }
 
+    public int Level => Stat.Level;
+
     #region ÄÄÆ÷³ÍÆ®
     public DamageCaster DamageCasterCompo { get; protected set; }
     public Health HealthCompo { get; protected set; }

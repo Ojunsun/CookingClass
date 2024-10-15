@@ -259,7 +259,6 @@ GameObject:
   - component: {fileID: 1118541597822318168}
   - component: {fileID: 5160847403024478726}
   - component: {fileID: 341329768639304676}
-  - component: {fileID: 340428767445054970}
   m_Layer: 6
   m_Name: Army1
   m_TagString: Untagged
@@ -301,7 +300,7 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 128
-  <Stat>k__BackingField: {fileID: 11400000, guid: f42daf54622979046aa1b498296892c3, type: 2}
+  <Stat>k__BackingField: {fileID: 11400000, guid: a87a1e80bf8efbc44a9e31ed7c73746e, type: 2}
 --- !u!95 &7634610728805427240
 Animator:
   serializedVersion: 5
@@ -434,18 +433,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a95f111f9f824744b7700f2406ad7eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &340428767445054970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5990541215796021018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ede61b043710b7409dd1c6769baa415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7751584971636906963

@@ -6,7 +6,10 @@ using UnityEngine;
 public class EntityStatSO : ScriptableObject
 {
     // common epic hero legend  
+    [Header("Level")]
+    public int Level;
 
+    [Header("Stat")]
     public float MaxHP;
     public float Damage;
     public float MoveSpeed;
