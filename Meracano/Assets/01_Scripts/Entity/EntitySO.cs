@@ -5,6 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="SO/Entity/Main")]
 public class EntitySO : ScriptableObject
 {
-    public int Level;
-    public EntityStatSO Stats;
+    public List<Entity> Entities;
 }

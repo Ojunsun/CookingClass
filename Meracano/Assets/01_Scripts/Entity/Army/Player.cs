@@ -31,10 +31,4 @@ public class Player : Entity
         transform.SetParent(parent);
         transform.localPosition = Vector3.zero;
     }
-
-    public void Upgrade()
-    {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        sr.color = UnityEngine.Random.ColorHSV();
-    }
 }
