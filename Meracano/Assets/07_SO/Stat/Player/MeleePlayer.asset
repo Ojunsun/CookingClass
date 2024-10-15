@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MeleePlayer
   m_EditorClassIdentifier: 
   maxHp: 100
-  damage: 10
+  damage: 5
   moveSpeed: 5
   attackDistance: 2

@@ -6,12 +6,12 @@ public class PlayerMovement : MonoBehaviour, IPlayerComponent
 {
     private Player _player;
     private Entity _target;
-    private PlayerAttack _playerAttack;
+    private PlayerAttackComponent _playerAttack;
 
     public void Initialize(Player player)
     {
         _player = player;
-        _playerAttack = player.GetCompo<PlayerAttack>();
+        _playerAttack = player.GetCompo<PlayerAttackComponent>();
     }
 
     private void OnEnable()

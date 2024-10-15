@@ -25,4 +25,16 @@ public class Player : Entity
         }
         return default;
     }
+
+    public void SetTransform(Transform parent)
+    {
+        transform.SetParent(parent);
+        transform.localPosition = Vector3.zero;
+    }
+
+    public void Upgrade()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.color = UnityEngine.Random.ColorHSV();
+    }
 }

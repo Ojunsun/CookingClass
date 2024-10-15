@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class Entity : PoolableMono
 {
     public LayerMask TargetLayer;
     
@@ -27,7 +27,6 @@ public class Entity : MonoBehaviour
         HealthCompo?.SetMaxHealth(Stat.maxHp);
 
         _targetColliders = new Collider2D[_maxDetectEnemy];
-        Debug.Log($"_targetColliders initialized with size: {_targetColliders.Length}");
     }
 
     public T FindNearestTarget<T>(float checkRange, LayerMask mask) where T : Entity
@@ -53,5 +52,17 @@ public class Entity : MonoBehaviour
             }
         }
         return target;
+    }
+
+    public void LookTarget()
+    { 
+        var target = FindNearestTarget<Entity>(50f, TargetLayer);
+
+        transform.LookAt(target.transform);
+    }
+
+    public override void Init()
+    {
+
     }
 }
