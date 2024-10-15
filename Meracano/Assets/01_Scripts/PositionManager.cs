@@ -25,8 +25,6 @@ public class PositionManager : MonoBehaviour
             for(int j = 0; j < width; ++j)
             {
                 PositionPrefab positionPrefab = PoolManager.Instance.Pop("PositionPrefab") as PositionPrefab;
-
-                positionPrefab.transform.SetParent(this.transform);
                 posList.Add(positionPrefab);
 
                 positionPrefab.SetTransform(startPosX + j * 1.1f, startPosY - i * 1.3f);

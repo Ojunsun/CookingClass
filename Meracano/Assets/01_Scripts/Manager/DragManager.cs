@@ -43,8 +43,7 @@ public class DragManager : MonoSingleton<DragManager>
             return;
         }
 
-        Vector3 pos = CheckMousePosition();
-        Collider2D[] colliders = Physics2D.OverlapPointAll(pos);
+        Collider2D[] colliders = Physics2D.OverlapPointAll(CheckMousePosition());
 
         foreach (var col in colliders)
         {
@@ -65,10 +64,9 @@ public class DragManager : MonoSingleton<DragManager>
 
     private void CheckPositionPref()
     {
-        Vector3 pos = CheckMousePosition();
-        Collider2D[] colliders = Physics2D.OverlapPointAll(pos);
+        Collider2D[] colliders = Physics2D.OverlapPointAll(CheckMousePosition());
 
-        if (colliders.Length <= 0)
+        if (colliders.Length <= 0 && draggedPlayer == null)
         {
             currentPointedPosition?.MouseExit();
             currentPointedPosition = null;
@@ -106,9 +104,7 @@ public class DragManager : MonoSingleton<DragManager>
 
     private void DragPlayer()
     {
-        Vector3 pos = CheckMousePosition();
-        pos.z = 0;
-        draggedPlayer.transform.position = pos;
+        draggedPlayer.transform.position = CheckMousePosition();
     }
 
     private void EndDrag()

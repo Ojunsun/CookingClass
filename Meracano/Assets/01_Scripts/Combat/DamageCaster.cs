@@ -17,6 +17,6 @@ public class DamageCaster : MonoBehaviour
     {
         var target = _onwer.FindNearestTarget<Entity>(50f, _onwer.TargetLayer);
 
-        target.HealthCompo.ApplyDamage(_onwer.Stat.damage);
+        target.HealthCompo.ApplyDamage(_onwer.Stat.Damage);
     }
 }
