@@ -6,7 +6,8 @@ using UnityEngine;
 public class Entity : PoolableMono
 {
     public LayerMask TargetLayer;
-    
+    public bool IsBattle;
+
     private float speed = 5;
 
     private int _maxDetectEnemy = 5;

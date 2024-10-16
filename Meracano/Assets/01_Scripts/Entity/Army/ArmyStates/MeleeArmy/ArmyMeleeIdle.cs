@@ -16,6 +16,11 @@ public class ArmyMeleeIdle : ArmyState
     public override void UpdateState()
     {
         base.UpdateState();
+
+        if(_army.IsBattle)
+        {
+            _stateMachine.ChangeState(_army.GetState(ArmyMeleeState.Move));
+        }
     }
 
     public override void Exit()

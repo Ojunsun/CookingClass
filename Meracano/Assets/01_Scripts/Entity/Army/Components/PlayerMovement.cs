@@ -8,22 +8,12 @@ public class PlayerMovement : MonoBehaviour, IPlayerComponent
     private Entity _target;
     private PlayerAttackComponent _playerAttack;
 
+    public bool DoAttack = false;
+
     public void Initialize(Player player)
     {
         _player = player;
         _playerAttack = player.GetCompo<PlayerAttackComponent>();
-    }
-
-    private void OnEnable()
-    {
-        EventManager.OnBattleStartEvent += OnBattleStartEventHandler;
-    }
-
-    private void OnBattleStartEventHandler()
-    {
-        _target = _player.FindNearestTarget<Entity>(50f, _player.TargetLayer);
-
-        MoveToTargetPos(_target.transform);
     }
 
     public void MoveToTargetPos(Transform _targetPos)
@@ -41,7 +31,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerComponent
 
             if (distanceToTarget <= targetDis)
             {
-                _playerAttack.AttackTarget();
+                DoAttack = true;
                 yield break;
             }
 

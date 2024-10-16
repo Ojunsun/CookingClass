@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEngine.GraphicsBuffer;
 
 public abstract class Player : Entity
 {
@@ -12,10 +14,22 @@ public abstract class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+
+        StateMachine = new ArmyStateMachine();
+
         _components = new Dictionary<Type, IPlayerComponent>();
         GetComponentsInChildren<IPlayerComponent>().ToList().ForEach(compo => _components.Add(compo.GetType(), compo));
 
         _components.Values.ToList().ForEach(compo => compo.Initialize(this));
+    }
+
+    private void OnEnable()
+    {
+        EventManager.OnBattleStartEvent += OnBattleStartEventHandler;
+    }
+    private void OnBattleStartEventHandler()
+    {
+        IsBattle = true;
     }
 
     public T GetCompo<T>() where T : class

@@ -6,7 +6,7 @@ public class ArmyStateMachine
 {
     public ArmyState currentState { get; private set; }
 
-    public void Inirialize(ArmyState startState)
+    public void Initialize(ArmyState startState)
     {
         currentState = startState;
         currentState.Enter();
