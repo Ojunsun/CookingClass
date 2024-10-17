@@ -305,7 +305,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   IsBattle: 0
-  <Stat>k__BackingField: {fileID: 11400000, guid: f42daf54622979046aa1b498296892c3, type: 2}
+  <Stat>k__BackingField: {fileID: 11400000, guid: a87a1e80bf8efbc44a9e31ed7c73746e, type: 2}
 --- !u!95 &7634610728805427240
 Animator:
   serializedVersion: 5

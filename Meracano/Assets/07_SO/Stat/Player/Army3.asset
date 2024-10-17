@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Army3
   m_EditorClassIdentifier: 
   Level: 3
-  MaxHP: 0
-  Damage: 0
-  MoveSpeed: 0
-  AttackDistance: 0
+  MaxHP: 40
+  Damage: 7
+  MoveSpeed: 5
+  AttackDistance: 3
