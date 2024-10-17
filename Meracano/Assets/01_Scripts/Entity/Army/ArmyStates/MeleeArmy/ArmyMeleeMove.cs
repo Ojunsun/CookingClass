@@ -25,10 +25,11 @@ public class ArmyMeleeMove : ArmyState
         if(_army.IsBattle)
         {
             _movementCompo.MoveToTargetPos(_target.transform);
+            _movementCompo.LookTarget(_target.transform);
         }
 
 
-        if(_movementCompo.DoAttack)
+        if(_army.DoAttack)
         {
             _stateMachine.ChangeState(_army.GetState(ArmyMeleeState.Attack));
         }

@@ -7,10 +7,9 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
-
+    
     public event Action OnHit;
     public event Action OnDead;
-
     public void SetMaxHealth(float _maxHealth)
     {
         maxHealth = currentHealth = _maxHealth;

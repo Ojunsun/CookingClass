@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MeleeEnemy
   m_EditorClassIdentifier: 
   Level: 0
-  MaxHP: 100
+  MaxHP: 10
   Damage: 5
   MoveSpeed: 3
   AttackDistance: 5
