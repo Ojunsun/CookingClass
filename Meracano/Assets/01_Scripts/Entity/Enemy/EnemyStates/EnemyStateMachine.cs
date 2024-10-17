@@ -6,7 +6,7 @@ public class EnemyStateMachine
 {
     public EnemyState currentState { get; private set; }
 
-    public void Inirialize(EnemyState startState)
+    public void Initialize(EnemyState startState)
     {
         currentState = startState;
         currentState.Enter();

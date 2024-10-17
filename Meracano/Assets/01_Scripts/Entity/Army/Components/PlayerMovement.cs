@@ -6,14 +6,14 @@ public class PlayerMovement : MonoBehaviour, IPlayerComponent
 {
     private Player _player;
     private Entity _target;
-    private PlayerAttackComponent _playerAttack;
+    private PlayerAttack _playerAttack;
 
     public bool DoAttack = false;
 
     public void Initialize(Player player)
     {
         _player = player;
-        _playerAttack = player.GetCompo<PlayerAttackComponent>();
+        _playerAttack = player.GetCompo<PlayerAttack>();
     }
 
     public void MoveToTargetPos(Transform _targetPos)
@@ -30,6 +30,5 @@ public class PlayerMovement : MonoBehaviour, IPlayerComponent
         {
             transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _player.Stat.MoveSpeed * Time.deltaTime);
         }
-
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDeadComponent : MonoBehaviour, IPlayerComponent
+public class PlayerDead : MonoBehaviour, IPlayerComponent
 {
     private Player _player;
 

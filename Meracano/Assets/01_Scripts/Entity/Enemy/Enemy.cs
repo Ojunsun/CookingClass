@@ -19,6 +19,22 @@ public abstract class Enemy : Entity
         _components.Values.ToList().ForEach(compo => compo.Initialize(this));
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnBattleStartEvent += OnBattleStartEventHandler;
+    }
+
+    private void Update()
+    {
+        if (StateMachine.currentState != null)
+            StateMachine.UpdateMachine();
+    }
+
+    private void OnBattleStartEventHandler()
+    {
+        IsBattle = true;
+    }
+
     public T GetCompo<T>() where T : class
     {
         if(_components.TryGetValue(typeof(T), out IEnemyComponent compo))

@@ -16,6 +16,11 @@ public class EnemyMeleeIdle : EnemyState
     public override void UpdateState()
     {
         base.UpdateState();
+
+        if(_enemy.IsBattle)
+        {
+            _stateMachine.ChangeState(_enemy.GetState(EnemyMeleeState.Move));
+        }
     }
 
     public override void Exit()
