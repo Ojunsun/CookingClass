@@ -27,6 +27,13 @@ public abstract class Player : Entity
     {
         EventManager.OnBattleStartEvent += OnBattleStartEventHandler;
     }
+
+    private void Update()
+    {
+        if(StateMachine.currentState != null)
+            StateMachine.UpdateMachine();
+    }
+
     private void OnBattleStartEventHandler()
     {
         IsBattle = true;

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb089d61ecd9bfa41b3e71539e714602, type: 3}
   m_Name: MeleePlayer
   m_EditorClassIdentifier: 
-  maxHp: 100
-  damage: 5
-  moveSpeed: 5
-  attackDistance: 2
+  Level: 0
+  MaxHP: 50
+  Damage: 10
+  MoveSpeed: 5
+  AttackDistance: 3

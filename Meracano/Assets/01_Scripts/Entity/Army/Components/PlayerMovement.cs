@@ -18,25 +18,18 @@ public class PlayerMovement : MonoBehaviour, IPlayerComponent
 
     public void MoveToTargetPos(Transform _targetPos)
     {
-        StartCoroutine(MoveToTarget(_targetPos));
-    }
-
-    private IEnumerator MoveToTarget(Transform _targetPos)
-    {
         var targetDis = _player.Stat.AttackDistance;
 
-        while (true)
+        float distanceToTarget = Vector3.Distance(transform.position, _targetPos.position);
+
+        if (distanceToTarget <= targetDis)
         {
-            float distanceToTarget = Vector3.Distance(transform.position, _targetPos.position);
-
-            if (distanceToTarget <= targetDis)
-            {
-                DoAttack = true;
-                yield break;
-            }
-
-            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _player.Stat.MoveSpeed * Time.deltaTime);
-            yield return null;
+            DoAttack = true;
         }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _player.Stat.MoveSpeed * Time.deltaTime);
+        }
+
     }
 }

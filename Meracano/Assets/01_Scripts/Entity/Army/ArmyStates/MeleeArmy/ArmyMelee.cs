@@ -20,6 +20,7 @@ public class ArmyMelee : Player
         stateDictionary = new Dictionary<ArmyMeleeState, ArmyState>(){
             {ArmyMeleeState.Idle, new ArmyMeleeIdle(this, StateMachine, "Idle") },
             {ArmyMeleeState.Move, new ArmyMeleeMove(this, StateMachine, "Move") },
+            {ArmyMeleeState.Attack, new ArmyMeleeAttack(this, StateMachine, "Attack") }
         };
     }
 

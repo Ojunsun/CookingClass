@@ -27,6 +27,7 @@ public class ArmyMeleeMove : ArmyState
             _movementCompo.MoveToTargetPos(_target.transform);
         }
 
+
         if(_movementCompo.DoAttack)
         {
             _stateMachine.ChangeState(_army.GetState(ArmyMeleeState.Attack));

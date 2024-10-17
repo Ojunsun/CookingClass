@@ -383,6 +383,7 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 64
+  IsBattle: 0
   <Stat>k__BackingField: {fileID: 11400000, guid: 47c1eca63a2b1d04696f43d80d64b5e6, type: 2}
 --- !u!1 &264193654
 GameObject:
@@ -590,6 +591,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5990541215796021018, guid: 213c1b823ad41784ca5cedb3f79c74c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1932362749}
+    - targetCorrespondingSourceObject: {fileID: 5990541215796021018, guid: 213c1b823ad41784ca5cedb3f79c74c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1932362756}
   m_SourcePrefab: {fileID: 100100000, guid: 213c1b823ad41784ca5cedb3f79c74c3, type: 3}
 --- !u!1 &1932362739 stripped
 GameObject:
@@ -635,6 +639,7 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 128
+  IsBattle: 0
   <Stat>k__BackingField: {fileID: 11400000, guid: f42daf54622979046aa1b498296892c3, type: 2}
 --- !u!114 &1932362749
 MonoBehaviour:
@@ -646,6 +651,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fe4ecf692a61aa45b06e4b194beeefd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1932362756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932362739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d2f4ed26ede5c64d9fb9c25b8d7c3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
