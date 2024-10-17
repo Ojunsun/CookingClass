@@ -6,13 +6,17 @@ using UnityEngine;
 public class Entity : PoolableMono
 {
     public LayerMask TargetLayer;
-    
+    public bool IsBattle = false;
+    public bool DoAttack = false;
+
     private float speed = 5;
 
     private int _maxDetectEnemy = 5;
     private Collider2D[] _targetColliders;
 
     [field:SerializeField] public EntityStatSO Stat { get; protected set; }
+
+    public int Level => Stat.Level;
 
     #region ÄÄÆ÷³ÍÆ®
     public DamageCaster DamageCasterCompo { get; protected set; }
@@ -24,7 +28,7 @@ public class Entity : PoolableMono
         DamageCasterCompo = GetComponentInChildren<DamageCaster>();
         HealthCompo = GetComponent<Health>();
 
-        HealthCompo?.SetMaxHealth(Stat.maxHp);
+        HealthCompo?.SetMaxHealth(Stat.MaxHP);
 
         _targetColliders = new Collider2D[_maxDetectEnemy];
     }

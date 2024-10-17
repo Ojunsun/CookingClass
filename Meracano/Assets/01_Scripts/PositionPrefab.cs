@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PositionPrefab : PoolableMono
 {
-    private Player curPlayer;
     private SpriteRenderer sr;
 
     private void Awake()
@@ -15,14 +14,12 @@ public class PositionPrefab : PoolableMono
     // player
     public override void Init()
     {
-        curPlayer = null;
         transform.localPosition = Vector3.zero;
     }
 
     public void SetPlayer(Player p)
     {
-        curPlayer = p;
-        curPlayer.SetTransform(transform);
+        p.SetTransform(transform);
     }
 
     public void SetTransform(float x, float y)

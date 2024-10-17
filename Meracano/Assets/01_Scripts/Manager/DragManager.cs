@@ -7,15 +7,16 @@ public class DragManager : MonoSingleton<DragManager>
     private bool isDragging;
 
     private Player draggedPlayer;
+    private PositionPrefab firstPointedPosition;
     private PositionPrefab currentPointedPosition;
 
     private void Update()
     {
-        CheckPositionPref();
+        CheckPositionPref();// OnBattleEndEvent 실행되면 이게 계속 실행되어야 함
 
         if (Input.GetMouseButtonDown(0))
         { 
-            StartDrag(); // OnBattleEndEvent 실행되면 이게 실행되어야 할 것 같다
+            StartDrag(); 
         }
 
         if (isDragging && draggedPlayer != null)
@@ -43,21 +44,18 @@ public class DragManager : MonoSingleton<DragManager>
             return;
         }
 
-        Vector3 pos = CheckMousePosition();
-        Collider2D[] colliders = Physics2D.OverlapPointAll(pos);
+        Collider2D[] colliders = Physics2D.OverlapPointAll(CheckMousePosition());
 
         foreach (var col in colliders)
         {
             if(col.TryGetComponent<Player>(out Player mergePlayer)) // 무조건 draggedplayer가 감지가 됨
             {
-                if(mergePlayer != draggedPlayer) // 두 개가 다르고 + 레벨이 같을 경우
+                if(mergePlayer != draggedPlayer)
                 {
-                    MergeManager.Instance.MergePlayer(draggedPlayer, mergePlayer);
+                    SpawnManager.Instance.MergePlayer(draggedPlayer, mergePlayer, firstPointedPosition, currentPointedPosition);
                 }
-                // 두 개가 다르고 + 레벨이 다를 경우
-                else //
+                else
                 {
-                    Debug.Log("dd");
                     currentPointedPosition?.SetPlayer(draggedPlayer);
                 }
             }
@@ -66,10 +64,9 @@ public class DragManager : MonoSingleton<DragManager>
 
     private void CheckPositionPref()
     {
-        Vector3 pos = CheckMousePosition();
-        Collider2D[] colliders = Physics2D.OverlapPointAll(pos);
+        Collider2D[] colliders = Physics2D.OverlapPointAll(CheckMousePosition());
 
-        if (colliders.Length <= 0)
+        if (colliders.Length <= 0 && draggedPlayer == null)
         {
             currentPointedPosition?.MouseExit();
             currentPointedPosition = null;
@@ -100,21 +97,22 @@ public class DragManager : MonoSingleton<DragManager>
         {
             isDragging = true;
             draggedPlayer = p;
-        }
 
-        MergeManager.Instance.FindCanMergePlayer(draggedPlayer);
+            firstPointedPosition = p.GetComponentInParent<PositionPrefab>();
+
+            //SpawnManager.Instance.FindCanMergePlayer(draggedPlayer);
+        }
     }
 
     private void DragPlayer()
     {
-        Vector3 pos = CheckMousePosition();
-        pos.z = 0;
-        draggedPlayer.transform.position = pos;
+        draggedPlayer.transform.position = CheckMousePosition();
     }
 
     private void EndDrag()
     {
         GetObjectInMousePosition();
+
         isDragging = false;
         draggedPlayer = null;
     }

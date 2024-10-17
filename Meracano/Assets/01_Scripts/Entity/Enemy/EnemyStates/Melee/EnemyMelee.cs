@@ -20,7 +20,14 @@ public class EnemyMelee : Enemy
         base.Awake();
         stateDictionary = new Dictionary<EnemyMeleeState, EnemyState>(){
             {EnemyMeleeState.Idle, new EnemyMeleeIdle(this, StateMachine, "Idle") },
+            {EnemyMeleeState.Move, new EnemyMeleeMove(this, StateMachine, "Move") },
+            {EnemyMeleeState.Attack, new EnemyMeleeAttack(this, StateMachine, "Attack") }
         };
+    }
+
+    private void Start()
+    {
+        StateMachine.Initialize(stateDictionary[EnemyMeleeState.Idle]);
     }
 
     public override EnemyState GetState(Enum enumType)

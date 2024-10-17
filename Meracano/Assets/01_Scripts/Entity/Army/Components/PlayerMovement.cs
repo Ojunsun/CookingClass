@@ -1,52 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour, IPlayerComponent
 {
     private Player _player;
     private Entity _target;
-    private PlayerAttackComponent _playerAttack;
+    private PlayerAttack _playerAttack;
 
     public void Initialize(Player player)
     {
         _player = player;
-        _playerAttack = player.GetCompo<PlayerAttackComponent>();
+        _playerAttack = player.GetCompo<PlayerAttack>();
     }
 
-    private void OnEnable()
+    public void MoveToTargetPos(Transform _targetTrm)
     {
-        EventManager.OnBattleStartEvent += OnBattleStartEventHandler;
-    }
+        var targetDis = _player.Stat.AttackDistance;
 
-    private void OnBattleStartEventHandler()
-    {
-        _target = _player.FindNearestTarget<Entity>(50f, _player.TargetLayer);
+        float distanceToTarget = Vector3.Distance(transform.position, _targetTrm.position);
 
-        MoveToTargetPos(_target.transform);
-    }
-
-    public void MoveToTargetPos(Transform _targetPos)
-    {
-        StartCoroutine(MoveToTarget(_targetPos));
-    }
-
-    private IEnumerator MoveToTarget(Transform _targetPos)
-    {
-        var targetDis = _player.Stat.attackDistance;
-
-        while (true)
+        if (distanceToTarget <= targetDis)
         {
-            float distanceToTarget = Vector3.Distance(transform.position, _targetPos.position);
-
-            if (distanceToTarget <= targetDis)
-            {
-                _playerAttack.AttackTarget();
-                yield break;
-            }
-
-            transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _player.Stat.moveSpeed * Time.deltaTime);
-            yield return null;
+            _player.DoAttack = true;
         }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, _targetTrm.position, _player.Stat.MoveSpeed * Time.deltaTime);
+        }
+    }
+
+    public void LookTarget(Transform _targetTrm)
+    {
+        Vector2 direction = _targetTrm.position - transform.position;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }

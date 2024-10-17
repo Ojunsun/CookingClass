@@ -15,8 +15,11 @@ public class DamageCaster : MonoBehaviour
 
     public void CastMeleeDamage()
     {
-        var target = _onwer.FindNearestTarget<Entity>(50f, _onwer.TargetLayer);
-
-        target.HealthCompo.ApplyDamage(_onwer.Stat.damage);
+        var target = _onwer.FindNearestTarget<Entity>(_onwer.Stat.AttackDistance, _onwer.TargetLayer);
+        
+        if(target != null)
+        {
+            target.HealthCompo.ApplyDamage(_onwer.Stat.Damage);
+        }
     }
 }
