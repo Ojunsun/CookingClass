@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SpawnManager : MonoSingleton<SpawnManager>
@@ -44,18 +45,15 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 
     public PositionPrefab FindClosestPosition()
     {
-        foreach(var pos in posList)
-        {
-            if (pos.transform.GetComponentInChildren<Player>() == null)
-            {
-                return pos;
-            }
-        }
-
-        return null;
+        return posList.FirstOrDefault(pos => pos.transform.GetComponentInChildren<Player>() == null);
     }
 
-    public void SpawnPlayer(int num = 0)
+    public Entity FindEntityLevel(int level)
+    {
+        return PlayerSO.Entities.FirstOrDefault(entity => entity.Level == level);
+    }
+
+    private void SpawnPlayer()
     {
         PositionPrefab closestPositionPref = FindClosestPosition();
 
@@ -65,31 +63,32 @@ public class SpawnManager : MonoSingleton<SpawnManager>
             return;
         }
 
-        Player newPlayer = PoolManager.Instance.Pop(PlayerSO.Entities[num].name) as Player;
+        Player newPlayer = PoolManager.Instance.Pop(FindEntityLevel(1)?.name) as Player;
         closestPositionPref.SetPlayer(newPlayer);
     }
 
-
-
     public void FindCanMergePlayer(Player player) // 레벨 같은 거 찾아주는 함수
     {
-        //int level = player.Level;
-        //
-        //foreach(var pos in posList)
-        //{
-        //    if(pos.transform.TryGetComponent<Player>(out Player p))
-        //    {
-        //        if(p != player && p.Level == player.Level)
-        //        {
-        //
-        //        }
-        //    }
-        //}
+        int level = player.Level;
+        
+        foreach(PositionPrefab posPrefab in posList)
+        {
+            Player p = posPrefab.GetComponentInChildren<Player>();
+            if (p != null && p != player && p.Level == level)
+            {
+                posPrefab.EnterCanMerge();
+            }
+        }
+    }
+
+    public void ResetDrag()
+    {
+        posList.ForEach(p => p.ExitCanMerge());
     }
 
     public void MergePlayer(Player player1, Player player2, PositionPrefab firstPointed, PositionPrefab lastPointed)
     {
-        if (player1.Level != player2.Level || player1.Level >= PlayerSO.Entities.Count)
+        if (player1.Level != player2.Level || FindEntityLevel(player1.Level + 1) == null)
         {
             Debug.Log("Level is Different || Max Level");
 
@@ -98,7 +97,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
             return;
         }
 
-        Player newPlayer = PoolManager.Instance.Pop(PlayerSO.Entities[player1.Level].name) as Player;
+        Player newPlayer = PoolManager.Instance.Pop(FindEntityLevel(player1.Level + 1).name) as Player;
         lastPointed.SetPlayer(newPlayer);
 
         PoolManager.Instance.Push(player1);

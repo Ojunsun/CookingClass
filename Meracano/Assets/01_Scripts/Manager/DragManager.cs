@@ -100,12 +100,12 @@ public class DragManager : MonoSingleton<DragManager>
 
             firstPointedPosition = p.GetComponentInParent<PositionPrefab>();
 
-            //SpawnManager.Instance.FindCanMergePlayer(draggedPlayer);
+            SpawnManager.Instance.FindCanMergePlayer(draggedPlayer);
         }
     }
 
     private void DragPlayer()
-    {
+    {   
         draggedPlayer.transform.position = CheckMousePosition();
     }
 
@@ -115,5 +115,7 @@ public class DragManager : MonoSingleton<DragManager>
 
         isDragging = false;
         draggedPlayer = null;
+
+        SpawnManager.Instance.ResetDrag();
     }
 }

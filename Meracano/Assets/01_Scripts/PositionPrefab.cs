@@ -5,10 +5,12 @@ using UnityEngine;
 public class PositionPrefab : PoolableMono
 {
     private SpriteRenderer sr;
+    private SpriteRenderer backGroundSr;
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        backGroundSr = transform.Find("Ground").GetComponentInChildren<SpriteRenderer>();
     }
 
     // player
@@ -34,5 +36,14 @@ public class PositionPrefab : PoolableMono
     public void MouseExit()
     {
         sr.color = Color.white;
+    }
+
+    public void EnterCanMerge()
+    {
+        backGroundSr.color = Color.yellow;
+    }
+    public void ExitCanMerge()
+    {
+        backGroundSr.color = Color.white;
     }
 }   
