@@ -32,6 +32,11 @@ public class EnemyMelee : Enemy
 
     public override EnemyState GetState(Enum enumType)
     {
-        throw new NotImplementedException();
+        var state = (EnemyMeleeState)enumType;
+        if (stateDictionary.TryGetValue(state, out EnemyState enemyState))
+        {
+            return enemyState;
+        }
+        return null;
     }
 }

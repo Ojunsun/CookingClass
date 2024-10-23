@@ -26,11 +26,20 @@ public class EnemyMovement : MonoBehaviour, IEnemyComponent
 
         if (distanceToTarget <= targetDis)
         {
-            DoAttack = true;
+            _enemy.DoAttack = true;
         }
         else
         {
             transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _enemy.Stat.MoveSpeed * Time.deltaTime);
         }
+    }
+
+    public void LookTarget(Transform _targetTrm)
+    {
+        Vector2 direction = _targetTrm.position - transform.position;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
+
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }

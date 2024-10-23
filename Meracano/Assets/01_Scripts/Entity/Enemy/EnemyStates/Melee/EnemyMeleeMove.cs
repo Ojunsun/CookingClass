@@ -26,10 +26,11 @@ public class EnemyMeleeMove : EnemyState
         if (_enemy.IsBattle)
         {
             _movementCompo.MoveToTargetPos(_target.transform);
+            _movementCompo.LookTarget(_target.transform);
         }
 
 
-        if (_movementCompo.DoAttack)
+        if (_enemy.DoAttack)
         {
             _stateMachine.ChangeState(_enemy.GetState(EnemyMeleeState.Attack));
         }

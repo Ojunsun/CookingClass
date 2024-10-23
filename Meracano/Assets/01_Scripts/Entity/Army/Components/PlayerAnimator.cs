@@ -10,6 +10,6 @@ public class PlayerAnimator : MonoBehaviour, IPlayerComponent
     public void Initialize(Player player)
     {
         _player = player;
-        Anim = player.GetCompo<Animator>();
+        Anim = GetComponent<Animator>();
     }
 }
