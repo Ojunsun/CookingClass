@@ -16,4 +16,4 @@ MonoBehaviour:
   MaxHP: 10
   Damage: 5
   MoveSpeed: 3
-  AttackDistance: 5
+  AttackDistance: 1
