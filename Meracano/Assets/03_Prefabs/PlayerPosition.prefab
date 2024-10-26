@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4186075499155210660}
   - component: {fileID: 3429480453799840751}
   m_Layer: 0
-  m_Name: PositionPrefab
+  m_Name: PlayerPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485d8b0f58fa3ea49ba267328889577d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPlayerPos: 1
 --- !u!61 &3429480453799840751
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -69,4 +69,10 @@ public class Entity : PoolableMono
     {
 
     }
+
+    public void SetTransform(Transform parent)
+    {
+        transform.SetParent(parent);
+        transform.localPosition = Vector3.zero;
+    }
 }
