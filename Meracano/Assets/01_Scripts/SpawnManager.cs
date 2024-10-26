@@ -8,7 +8,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 {
     public EntitySO PlayerSO;
 
-    private int height = 7;
+    private int height = 4;
     private int width = 5;
 
     private List<PositionPrefab> posList;
@@ -21,7 +21,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
     private void Start()
     {
         float startPosX = -2.2f;
-        float startPosY = 3.9f;
+        float startPosY = 0f;
 
         for(int i = 0; i < height; ++i)
         {
