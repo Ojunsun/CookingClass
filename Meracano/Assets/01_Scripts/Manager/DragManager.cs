@@ -56,7 +56,7 @@ public class DragManager : MonoSingleton<DragManager>
                 }
                 else
                 {
-                    currentPointedPosition?.SetPlayer(draggedPlayer);
+                    currentPointedPosition?.SetEntity(draggedPlayer);
                 }
             }
         }

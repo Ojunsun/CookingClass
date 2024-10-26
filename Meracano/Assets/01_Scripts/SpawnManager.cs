@@ -7,10 +7,6 @@ using UnityEngine;
 public class SpawnManager : MonoSingleton<SpawnManager>
 {
     public EntitySO PlayerSO;
-
-    private int height = 4;
-    private int width = 5;
-
     private List<PositionPrefab> posList;
 
     private void Awake()
@@ -20,17 +16,22 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 
     private void Start()
     {
-        float startPosX = -2.2f;
+        // EnemyPos x: -1.8f,y: 3.9f 아마 세 번 반복 필요
+        // 
+        int height = 4;
+        int width = 4;
+
+        float startPosX = -1.8f;
         float startPosY = 0f;
 
-        for(int i = 0; i < height; ++i)
+        for (int i = 0; i < height; ++i)
         {
             for(int j = 0; j < width; ++j)
             {
-                PositionPrefab positionPrefab = PoolManager.Instance.Pop("PositionPrefab") as PositionPrefab;
+                PositionPrefab positionPrefab = PoolManager.Instance.Pop("PlayerPosition") as PositionPrefab;
                 posList.Add(positionPrefab);
 
-                positionPrefab.SetTransform(startPosX + j * 1.1f, startPosY - i * 1.3f);
+                positionPrefab.SetTransform(startPosX + j * 1.2f, startPosY - i * 1.3f);
             }
         }
     }
@@ -64,7 +65,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
         }
 
         Player newPlayer = PoolManager.Instance.Pop(FindEntityLevel(1)?.name) as Player;
-        closestPositionPref.SetPlayer(newPlayer);
+        closestPositionPref.SetEntity(newPlayer);
     }
 
     public void FindCanMergePlayer(Player player) // 레벨 같은 거 찾아주는 함수
@@ -92,13 +93,13 @@ public class SpawnManager : MonoSingleton<SpawnManager>
         {
             Debug.Log("Level is Different || Max Level");
 
-            firstPointed.SetPlayer(player2);
-            lastPointed.SetPlayer(player1);
+            firstPointed.SetEntity(player2);
+            lastPointed.SetEntity(player1);
             return;
         }
 
         Player newPlayer = PoolManager.Instance.Pop(FindEntityLevel(player1.Level + 1).name) as Player;
-        lastPointed.SetPlayer(newPlayer);
+        lastPointed.SetEntity(newPlayer);
 
         PoolManager.Instance.Push(player1);
         PoolManager.Instance.Push(player2);

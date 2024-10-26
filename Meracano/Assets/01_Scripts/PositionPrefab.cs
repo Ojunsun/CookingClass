@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PositionPrefab : PoolableMono
 {
+    [SerializeField] private bool IsPlayerPos;
+
     private SpriteRenderer sr;
     private SpriteRenderer backGroundSr;
 
@@ -19,9 +21,9 @@ public class PositionPrefab : PoolableMono
         transform.localPosition = Vector3.zero;
     }
 
-    public void SetPlayer(Player p)
+    public void SetEntity(Entity e)
     {
-        p.SetTransform(transform);
+        e.SetTransform(transform);
     }
 
     public void SetTransform(float x, float y)
@@ -31,19 +33,19 @@ public class PositionPrefab : PoolableMono
 
     public void MouseEnter()
     {
-        sr.color = Color.red;
+        if (IsPlayerPos) sr.color = Color.red;
     }
     public void MouseExit()
     {
-        sr.color = Color.white;
+        if (IsPlayerPos) sr.color = Color.white;
     }
 
     public void EnterCanMerge()
     {
-        backGroundSr.color = Color.yellow;
+        if(IsPlayerPos) backGroundSr.color = Color.yellow;
     }
     public void ExitCanMerge()
     {
-        backGroundSr.color = Color.white;
+        if(IsPlayerPos) backGroundSr.color = Color.white;
     }
 }   
