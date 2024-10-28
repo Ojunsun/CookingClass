@@ -54,7 +54,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
         return PlayerSO.Entities.FirstOrDefault(entity => entity.Level == level);
     }
 
-    private void SpawnPlayer()
+    public void SpawnPlayer()
     {
         PositionPrefab closestPositionPref = FindClosestPosition();
 
