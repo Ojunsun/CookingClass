@@ -5,15 +5,14 @@ using static UnityEngine.GraphicsBuffer;
 
 public class DamageCaster : MonoBehaviour
 {
-    private Entity _onwer;
-
+    public Entity _onwer;
 
     private void Awake()
     {
         _onwer = GetComponentInParent<Entity>();
     }
 
-    public void CastMeleeDamage()
+    public void CastDamage()
     {
         var target = _onwer.FindNearestTarget<Entity>(_onwer.Stat.AttackDistance, _onwer.TargetLayer);
         

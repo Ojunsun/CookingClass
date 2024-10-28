@@ -13,6 +13,6 @@ public class EnemyAttack : MonoBehaviour, IEnemyComponent
 
     public void AttackTarget()
     {
-        _enemy.DamageCasterCompo.CastMeleeDamage();
+        _enemy.DamageCasterCompo.CastDamage();
     }
 }

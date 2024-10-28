@@ -14,6 +14,6 @@ public class PlayerAttack : MonoBehaviour, IPlayerComponent
 
     public void AttackTarget()
     {
-        _player.DamageCasterCompo.CastMeleeDamage();
+        _player.DamageCasterCompo.CastDamage();
     }
 }

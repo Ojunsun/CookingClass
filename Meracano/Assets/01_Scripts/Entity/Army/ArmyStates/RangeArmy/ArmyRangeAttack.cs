@@ -8,5 +8,8 @@ public class ArmyRangeAttack : ArmyState
     {
     }
 
+    public override void Enter()
+    {
 
+    }
 }
