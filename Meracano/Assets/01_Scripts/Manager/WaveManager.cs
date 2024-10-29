@@ -7,8 +7,18 @@ public class WaveManager : Singleton<WaveManager>
     public WaveSO Waves;
     private int currentWaveCnt = 0;
 
+    public int Height { get; private set; } = 3;
+    public int Width { get; private set; }
+
+    private float space;
+
+    public float StartPosY { get; private set; } = 3.9f;
+
     private void Start()
     {
+        Width = SpawnManager.Instance.Width;
+        space = SpawnManager.Instance.Space;
+
         SetEnemy();
     }
 
@@ -21,18 +31,14 @@ public class WaveManager : Singleton<WaveManager>
     // BattleEnd 되면 실행
     public void SetEnemy()
     {
-        int height = 3;
-        int width = 4;
+        float startPosX = (Width - 1) * -space / 2;
 
-        float startPosX = -1.8f;
-        float startPosY = 3.9f;
-
-        for (int i = 0; i < height; ++i)
+        for (int i = 0; i < Height; ++i)
         {
-            for (int j = 0; j < width; ++j)
+            for (int j = 0; j < Width; ++j)
             {
                 PositionPrefab positionPrefab = PoolManager.Instance.Pop("EnemyPosition") as PositionPrefab;
-                positionPrefab.SetTransform(startPosX + j * 1.2f, startPosY - i * 1.3f);
+                positionPrefab.SetTransform(startPosX + j * space, StartPosY - i * space);
 
                 Waves.StageList[currentWaveCnt].EnemyList.ForEach(e =>
                 {

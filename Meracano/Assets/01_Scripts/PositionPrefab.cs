@@ -19,6 +19,7 @@ public class PositionPrefab : PoolableMono
     public override void Init()
     {
         transform.localPosition = Vector3.zero;
+        transform.localScale = Vector3.one * 0.7f;
     }
 
     public void SetEntity(Entity e)

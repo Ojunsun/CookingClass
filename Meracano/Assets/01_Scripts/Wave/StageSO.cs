@@ -9,14 +9,27 @@ public class EnemyArrangementClass
     public Enemy enemyPref;
     
     [Header("ÁÂÇ¥")]
-    [Range(0, 3)]
     public int x;
-
-    [Range(0, 2)]
     public int y;
 }
 [CreateAssetMenu(menuName = "SO/Wave/Stage")]
 public class StageSO : ScriptableObject
 {
     public List<EnemyArrangementClass> EnemyList;
+
+    private void OnValidate()
+    {
+        foreach (var enemyArrangement in EnemyList)
+        {
+            if (enemyArrangement.x < 0 || enemyArrangement.x >= SpawnManager.Instance.Width - 1)
+            {
+                Debug.LogWarning($"{enemyArrangement.x}, X ÁÂÇ¥ È®ÀÎ");
+            }
+
+            if (enemyArrangement.y < 0 || enemyArrangement.y >= WaveManager.Instance.Height - 1)
+            {
+                Debug.LogWarning($"{enemyArrangement.y}, Y ÁÂÇ¥ È®ÀÎ");
+            }
+        }
+    }
 }
