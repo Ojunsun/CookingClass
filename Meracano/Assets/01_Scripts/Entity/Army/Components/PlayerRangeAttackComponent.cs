@@ -13,17 +13,12 @@ public class PlayerRangeAttackComponent : MonoBehaviour, IPlayerComponent
         _player = player;
     }
 
-    private void Awake()
-    {
-        _arrow = GetComponent<Arrow>();
-    }
-
     public void RangeAttack()
     {
         Instantiate(_arrow);
 
         var target = _player.FindNearestTarget<Entity>(_player.Stat.AttackDistance, _player.TargetLayer);
-        Vector3 dir = transform.position - target.transform.position;
+        Vector2 dir = transform.position - target.transform.position;
 
         _arrow.Fire(dir);
     }
