@@ -29,14 +29,14 @@ public class SpawnManager : MonoSingleton<SpawnManager>
         float startPosX = (Width - 1) * -Space / 2;
         float startPosY = (WaveManager.Instance.StartPosY) - (Space * WaveManager.Instance.Height);
 
-        for (int i = 0; i < Height; ++i)
+        for (int y = 0; y < Height; ++y)
         {
-            for (int j = 0; j < Width; ++j)
+            for (int x = 0; x < Width; ++x)
             {
                 PositionPrefab positionPrefab = PoolManager.Instance.Pop("PlayerPosition") as PositionPrefab;
                 posList.Add(positionPrefab);
 
-                positionPrefab.SetTransform(startPosX + j * Space, startPosY - i * Space);
+                positionPrefab.SetTransform(startPosX + x * Space, startPosY - y * Space);
             }
         }
     }
@@ -92,6 +92,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 
             firstPointed.SetEntity(player2);
             lastPointed.SetEntity(player1);
+
             return;
         }
 

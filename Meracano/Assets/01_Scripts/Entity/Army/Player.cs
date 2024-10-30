@@ -48,11 +48,5 @@ public abstract class Player : Entity
         return default;
     }
 
-    public void Upgrade()
-    {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        sr.color = UnityEngine.Random.ColorHSV();
-    }
-
     public abstract ArmyState GetState(Enum enumType);
 }

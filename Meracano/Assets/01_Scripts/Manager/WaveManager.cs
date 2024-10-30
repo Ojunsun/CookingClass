@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : Singleton<WaveManager>
+public class WaveManager : MonoSingleton<WaveManager>
 {
     public WaveSO Waves;
     private int currentWaveCnt = 0;
@@ -32,23 +32,25 @@ public class WaveManager : Singleton<WaveManager>
     public void SetEnemy()
     {
         float startPosX = (Width - 1) * -space / 2;
+        Dictionary<(int x, int y), Enemy> findEnemyDictionary = new Dictionary<(int, int), Enemy>();
 
-        for (int i = 0; i < Height; ++i)
+        Waves.StageList[currentWaveCnt].EnemyList.ForEach(e =>
         {
-            for (int j = 0; j < Width; ++j)
+            findEnemyDictionary[(e.x, e.y)] = e.enemyPref;
+        });
+
+        for (int y = 0; y < Height; ++y)
+        {
+            for (int x = 0; x < Width; ++x)
             {
                 PositionPrefab positionPrefab = PoolManager.Instance.Pop("EnemyPosition") as PositionPrefab;
-                positionPrefab.SetTransform(startPosX + j * space, StartPosY - i * space);
+                positionPrefab.SetTransform(startPosX + x * space, StartPosY - y * space);
 
-                Waves.StageList[currentWaveCnt].EnemyList.ForEach(e =>
+                if (findEnemyDictionary.TryGetValue((x, y), out Enemy findEnemy))
                 {
-                    if(e.x == j && e.y == i)
-                    {
-                        Enemy enemy = PoolManager.Instance.Pop($"{e.enemyPref.name}") as Enemy;
-                        positionPrefab.SetEntity(enemy);
-                    }
-                });
-
+                    Enemy enemy = PoolManager.Instance.Pop($"{findEnemy.name}") as Enemy;
+                    positionPrefab.SetEntity(enemy);
+                }
             }
         }
     }

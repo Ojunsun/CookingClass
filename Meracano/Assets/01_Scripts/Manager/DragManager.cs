@@ -13,10 +13,14 @@ public class DragManager : MonoSingleton<DragManager>
     private void Update()
     {
         CheckPositionPref();// OnBattleEndEvent 실행되면 이게 계속 실행되어야 함
+        HandleMouseInput();
+    }
 
+    private void HandleMouseInput()
+    {
         if (Input.GetMouseButtonDown(0))
-        { 
-            StartDrag(); 
+        {
+            StartDrag();
         }
 
         if (isDragging && draggedPlayer != null)
@@ -60,13 +64,15 @@ public class DragManager : MonoSingleton<DragManager>
                 }
             }
         }
+
+        UIManager.Instance.DropPlayer(draggedPlayer);
     }
 
     private void CheckPositionPref()
     {
         Collider2D[] colliders = Physics2D.OverlapPointAll(CheckMousePosition());
 
-        if (colliders.Length <= 0 && draggedPlayer == null)
+        if ((draggedPlayer != null && colliders.Length <= 1) || draggedPlayer == null) 
         {
             currentPointedPosition?.MouseExit();
             currentPointedPosition = null;
