@@ -5,7 +5,6 @@ using UnityEngine;
 public class ArmyRangeAttack : ArmyState
 {
     private PlayerMovement _movementCompo;
-    private Entity _target;
 
     public ArmyRangeAttack(Player army, ArmyStateMachine stateMachine, string animBoolName) : base(army, stateMachine, animBoolName)
     {
@@ -15,14 +14,18 @@ public class ArmyRangeAttack : ArmyState
     public override void Enter()
     {
         base.Enter();
+        _army.Target = _army.FindNearestTarget<Entity>(50f, _army.TargetLayer);
+        _movementCompo.LookTarget(_army.Target.transform);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
 
-        _target = _army.FindNearestTarget<Entity>(50f, _army.TargetLayer);
-        _movementCompo.LookTarget(_target.transform);
+        if (_army.Target == null)
+        {
+            _stateMachine.ChangeState(_army.GetState(ArmyRangeState.Idle));
+        }
     }
 
     public override void Exit()

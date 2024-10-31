@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class EnemyMeleeAttack : EnemyState
@@ -16,6 +17,11 @@ public class EnemyMeleeAttack : EnemyState
     public override void UpdateState()
     {
         base.UpdateState();
+        if (_enemy.Target == null)
+        {
+            _enemy.DoAttack = false;
+            _stateMachine.ChangeState(_enemy.GetState(ArmyMeleeState.Move));
+        }
     }
 
     public override void Exit()

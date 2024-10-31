@@ -17,7 +17,7 @@ public class PlayerRangeAttackComponent : MonoBehaviour, IPlayerComponent
     {
         Arrow newArrow = Instantiate(_arrow, transform.position, Quaternion.identity);
 
-        var target = _player.FindNearestTarget<Entity>(_player.Stat.AttackDistance, _player.TargetLayer);
+        var target = _player.Target;
         Vector2 dir = (target.transform.position - transform.position).normalized;
 
         var damage = _player.Stat.Damage;

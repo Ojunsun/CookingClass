@@ -5,7 +5,6 @@ using UnityEngine;
 public class ArmyMeleeMove : ArmyState
 {
     private PlayerMovement _movementCompo;
-    private Entity _target;
 
     public ArmyMeleeMove(Player army, ArmyStateMachine stateMachine, string animBoolName) : base(army, stateMachine, animBoolName)
     {
@@ -15,7 +14,7 @@ public class ArmyMeleeMove : ArmyState
     public override void Enter()
     {
         base.Enter();
-        _target = _army.FindNearestTarget<Entity>(50f, _army.TargetLayer);
+        _army.Target = _army.FindNearestTarget<Entity>(50f, _army.TargetLayer);
     }
 
     public override void UpdateState()
@@ -24,8 +23,8 @@ public class ArmyMeleeMove : ArmyState
         
         if(_army.IsBattle)
         {
-            _movementCompo.MoveToTargetPos(_target.transform);
-            _movementCompo.LookTarget(_target.transform);
+            _movementCompo.MoveToTargetPos(_army.Target.transform);
+            _movementCompo.LookTarget(_army.Target.transform);
         }
 
 

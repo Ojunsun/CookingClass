@@ -188,4 +188,4 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 128
-  _detectRange: 1.008
+  _detectRange: 0.5

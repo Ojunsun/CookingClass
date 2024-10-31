@@ -11,6 +11,7 @@ public class ArmyRangeIdle : ArmyState
     public override void Enter()
     {
         base.Enter();
+        _army.Target = _army.FindNearestTarget<Entity>(50f, _army.TargetLayer);
     }
 
     public override void UpdateState()

@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class DamageCaster : MonoBehaviour
 {
     public LayerMask TargetLayer;
-    [Range(1.0f, 3.0f)]
+    [Range(0.5f, 3.0f)]
     public float _detectRange;
 
     public void CastDamage(float damage)

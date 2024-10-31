@@ -6,7 +6,6 @@ using UnityEngine;
 public class EnemyMeleeMove : EnemyState
 {
     private EnemyMovement _movementCompo;
-    private Entity _target;
 
     public EnemyMeleeMove(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
@@ -16,7 +15,7 @@ public class EnemyMeleeMove : EnemyState
     public override void Enter()
     {
         base.Enter();
-        _target = _enemy.FindNearestTarget<Entity>(50f, _enemy.TargetLayer);
+        _enemy.Target = _enemy.FindNearestTarget<Entity>(50f, _enemy.TargetLayer);
     }
 
     public override void UpdateState()
@@ -25,8 +24,8 @@ public class EnemyMeleeMove : EnemyState
 
         if (_enemy.IsBattle)
         {
-            _movementCompo.MoveToTargetPos(_target.transform);
-            _movementCompo.LookTarget(_target.transform);
+            _movementCompo.MoveToTargetPos(_enemy.Target.transform);
+            _movementCompo.LookTarget(_enemy.Target.transform);
         }
 
 

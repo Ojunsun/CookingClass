@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Entity : PoolableMono
 {
+    public Entity Target;
     public LayerMask TargetLayer;
     public bool IsBattle = false;
     public bool DoAttack = false;
@@ -56,13 +57,6 @@ public class Entity : PoolableMono
             }
         }
         return target;
-    }
-
-    public void LookTarget()
-    { 
-        var target = FindNearestTarget<Entity>(50f, TargetLayer);
-
-        transform.LookAt(target.transform);
     }
 
     public override void Init()
