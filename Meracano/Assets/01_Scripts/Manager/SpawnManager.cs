@@ -9,6 +9,11 @@ public class SpawnManager : MonoSingleton<SpawnManager>
     public EntitySO PlayerSO;
     private List<PositionPrefab> posList;
 
+    public int Height { get; private set; } = 4;
+    public int Width { get; private set; } = 5;
+
+    public float Space { get; private set; } = 0.9f;
+
     private void Awake()
     {
         posList = new List<PositionPrefab>();
@@ -16,31 +21,23 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 
     private void Start()
     {
-        // EnemyPos x: -1.8f,y: 3.9f 아마 세 번 반복 필요
-        // 
-        int height = 4;
-        int width = 4;
+        SetPositions();
+    }
 
-        float startPosX = -1.8f;
-        float startPosY = 0f;
+    private void SetPositions()
+    {
+        float startPosX = (Width - 1) * -Space / 2;
+        float startPosY = (WaveManager.Instance.StartPosY) - (Space * WaveManager.Instance.Height);
 
-        for (int i = 0; i < height; ++i)
+        for (int y = 0; y < Height; ++y)
         {
-            for(int j = 0; j < width; ++j)
+            for (int x = 0; x < Width; ++x)
             {
                 PositionPrefab positionPrefab = PoolManager.Instance.Pop("PlayerPosition") as PositionPrefab;
                 posList.Add(positionPrefab);
 
-                positionPrefab.SetTransform(startPosX + j * 1.2f, startPosY - i * 1.3f);
+                positionPrefab.SetTransform(startPosX + x * Space, startPosY - y * Space);
             }
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            SpawnPlayer();
         }
     }
 
@@ -95,6 +92,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 
             firstPointed.SetEntity(player2);
             lastPointed.SetEntity(player1);
+
             return;
         }
 

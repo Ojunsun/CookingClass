@@ -9,10 +9,9 @@ public class EnemyArrangementClass
     public Enemy enemyPref;
     
     [Header("ÁÂÇ¥")]
-    [Range(0, 3)]
+    [Range(0,4)]
     public int x;
-
-    [Range(0, 2)]
+    [Range(0,2)]
     public int y;
 }
 [CreateAssetMenu(menuName = "SO/Wave/Stage")]

@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : Singleton<WaveManager>
+public class WaveManager : MonoSingleton<WaveManager>
 {
     public WaveSO Waves;
     private int currentWaveCnt = 0;
 
+    public int Height { get; private set; } = 3;
+    public int Width { get; private set; }
+
+    private float space;
+
+    public float StartPosY { get; private set; } = 3.9f;
+
     private void Start()
     {
+        Width = SpawnManager.Instance.Width;
+        space = SpawnManager.Instance.Space;
+
         SetEnemy();
     }
 
@@ -21,28 +31,26 @@ public class WaveManager : Singleton<WaveManager>
     // BattleEnd 되면 실행
     public void SetEnemy()
     {
-        int height = 3;
-        int width = 4;
+        float startPosX = (Width - 1) * -space / 2;
+        Dictionary<(int x, int y), Enemy> findEnemyDictionary = new Dictionary<(int, int), Enemy>();
 
-        float startPosX = -1.8f;
-        float startPosY = 3.9f;
-
-        for (int i = 0; i < height; ++i)
+        Waves.StageList[currentWaveCnt].EnemyList.ForEach(e =>
         {
-            for (int j = 0; j < width; ++j)
+            findEnemyDictionary[(e.x, e.y)] = e.enemyPref;
+        });
+
+        for (int y = 0; y < Height; ++y)
+        {
+            for (int x = 0; x < Width; ++x)
             {
                 PositionPrefab positionPrefab = PoolManager.Instance.Pop("EnemyPosition") as PositionPrefab;
-                positionPrefab.SetTransform(startPosX + j * 1.2f, startPosY - i * 1.3f);
+                positionPrefab.SetTransform(startPosX + x * space, StartPosY - y * space);
 
-                Waves.StageList[currentWaveCnt].EnemyList.ForEach(e =>
+                if (findEnemyDictionary.TryGetValue((x, y), out Enemy findEnemy))
                 {
-                    if(e.x == j && e.y == i)
-                    {
-                        Enemy enemy = PoolManager.Instance.Pop($"{e.enemyPref.name}") as Enemy;
-                        positionPrefab.SetEntity(enemy);
-                    }
-                });
-
+                    Enemy enemy = PoolManager.Instance.Pop($"{findEnemy.name}") as Enemy;
+                    positionPrefab.SetEntity(enemy);
+                }
             }
         }
     }

@@ -19,6 +19,10 @@ public class PositionPrefab : PoolableMono
     public override void Init()
     {
         transform.localPosition = Vector3.zero;
+        transform.localScale = Vector3.one * 0.7f;
+
+        sr.color = Color.white;
+        backGroundSr.color = Color.white;
     }
 
     public void SetEntity(Entity e)
