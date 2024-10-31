@@ -19,9 +19,8 @@ public class Health : MonoBehaviour
     {
         currentHealth -= damage;
         OnHit?.Invoke();
-        Mathf.Clamp(currentHealth, 0, maxHealth);
-
-        if(Mathf.Approximately(currentHealth, 0))
+        
+        if(currentHealth <= 0)
             OnDead?.Invoke();
     }
 }

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Arrow : MonoBehaviour
 {
     [SerializeField]
     private float speed;
+    private float _damage;
 
     private DamageCaster _damageCasterCompo;
     private Rigidbody2D _rigid;
@@ -17,24 +19,25 @@ public class Arrow : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
     }
 
+    public void SetDamage(float damage)
+    {
+        _damage = damage;
+    }
+
     public void Fire(Vector3 dir)
     {
-        StartCoroutine(RemoveArrow());
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
         _rigid.AddForce(dir * speed, ForceMode2D.Impulse);
     }
 
-    IEnumerator RemoveArrow()
-    {
-        yield return new WaitForSeconds(3);
-        Destroy(gameObject);
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.layer == _damageCasterCompo._onwer.TargetLayer)
+        if((1 << other.gameObject.layer & _damageCasterCompo.TargetLayer) != 0)
         {
-            _damageCasterCompo.CastDamage();
+            Debug.Log(_damage);
+            _damageCasterCompo.CastDamage(_damage);
         }
     }
 }

@@ -5,20 +5,33 @@ using static UnityEngine.GraphicsBuffer;
 
 public class DamageCaster : MonoBehaviour
 {
-    public Entity _onwer;
+    public LayerMask TargetLayer;
+    [Range(1.0f, 3.0f)]
+    public float _detectRange;
 
-    private void Awake()
+    public void CastDamage(float damage)
     {
-        _onwer = GetComponentInParent<Entity>();
+        var coliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
+
+        if (coliders.Length <= 0)
+            return;
+        else
+        {
+            foreach(var colider in coliders)
+            {
+                var target = colider.GetComponent<Entity>();
+
+                if(target != null)
+                {
+                    target.HealthCompo.ApplyDamage(damage); 
+                }
+            }
+        }
     }
 
-    public void CastDamage()
+    private void OnDrawGizmosSelected()
     {
-        var target = _onwer.FindNearestTarget<Entity>(_onwer.Stat.AttackDistance, _onwer.TargetLayer);
-        
-        if(target != null)
-        {
-            target.HealthCompo.ApplyDamage(_onwer.Stat.Damage);
-        }
+        Gizmos.color = Color.red; // 기즈모 색상 설정
+        Gizmos.DrawWireSphere(transform.position, _detectRange); // 원형 기즈모 그리기
     }
 }
