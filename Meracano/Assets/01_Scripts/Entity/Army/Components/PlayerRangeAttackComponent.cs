@@ -15,7 +15,8 @@ public class PlayerRangeAttackComponent : MonoBehaviour, IPlayerComponent
 
     public void RangeAttack()
     {
-        Arrow newArrow = Instantiate(_arrow, transform.position, Quaternion.identity);
+        Arrow newArrow = PoolManager.Instance.Pop("arrow") as Arrow;
+        newArrow.transform.position = transform.position;
 
         var target = _player.Target;
         Vector2 dir = (target.transform.position - transform.position).normalized;

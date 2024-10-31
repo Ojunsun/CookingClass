@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class Arrow : MonoBehaviour
+public class Arrow : PoolableMono
 {
     [SerializeField]
     private float speed;
@@ -37,6 +37,13 @@ public class Arrow : MonoBehaviour
         if((1 << other.gameObject.layer & _damageCasterCompo.TargetLayer) != 0)
         {
             _damageCasterCompo.CastDamage(_damage);
+
+            PoolManager.Instance.Push(this);
         }
+    }
+
+    public override void Init()
+    {
+
     }
 }
