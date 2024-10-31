@@ -15,17 +15,12 @@ public class DamageCaster : MonoBehaviour
 
         if (coliders.Length <= 0)
             return;
-        else
-        {
-            foreach(var colider in coliders)
-            {
-                var target = colider.GetComponent<Entity>();
 
-                if(target != null)
-                {
-                    target.HealthCompo.ApplyDamage(damage); 
-                }
-            }
+        var target = coliders[0].GetComponent<Entity>();
+
+        if (target != null)
+        {
+            target.HealthCompo.ApplyDamage(damage);
         }
     }
 

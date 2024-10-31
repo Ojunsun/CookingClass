@@ -36,7 +36,6 @@ public class Arrow : MonoBehaviour
     {
         if((1 << other.gameObject.layer & _damageCasterCompo.TargetLayer) != 0)
         {
-            Debug.Log(_damage);
             _damageCasterCompo.CastDamage(_damage);
         }
     }
