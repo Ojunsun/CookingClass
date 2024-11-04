@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     
     public event Action OnHit;
     public event Action OnDead;
+
     public void SetMaxHealth(float _maxHealth)
     {
         maxHealth = currentHealth = _maxHealth;

@@ -28,6 +28,11 @@ public abstract class Player : Entity
         EventManager.OnBattleStartEvent += OnBattleStartEventHandler;
     }
 
+    private void OnDisable()
+    {
+        EventManager.OnBattleStartEvent -= OnBattleStartEventHandler;
+    }
+
     private void Update()
     {
         if(StateMachine.currentState != null)

@@ -21,7 +21,7 @@ public class ArmyMeleeAttack : ArmyState
         if(_army.Target == null)
         {
             _army.DoAttack = false;
-            _stateMachine.ChangeState(_army.GetState(ArmyMeleeState.Move));
+            _stateMachine.ChangeState(_army.GetState(ArmyMeleeState.Idle));
         }
     }
 

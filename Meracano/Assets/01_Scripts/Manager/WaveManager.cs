@@ -28,6 +28,11 @@ public class WaveManager : MonoSingleton<WaveManager>
         EventManager.OnBattleStartEvent?.Invoke();
     }
 
+    public void BattleEndEventHandler() // 게임 오버시 실행 될 함수
+    {
+        EventManager.OnBattleEndEvent?.Invoke();
+    }
+
     // BattleEnd 되면 실행
     public void SetEnemy()
     {

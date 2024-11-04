@@ -24,6 +24,11 @@ public abstract class Enemy : Entity
         EventManager.OnBattleStartEvent += OnBattleStartEventHandler;
     }
 
+    private void OnDisable()
+    {
+        EventManager.OnBattleStartEvent -= OnBattleStartEventHandler;
+    }
+
     private void Update()
     {
         if (StateMachine.currentState != null)
