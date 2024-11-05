@@ -44,9 +44,15 @@ public class BattleManager : MonoSingleton<BattleManager>
 
     private void CheckBattleEnd()
     {
-        if(players.Count <= 0 || enemies.Count <= 0)
+        if(enemies.Count <= 0)
         {
             EventManager.OnBattleEndEvent.Invoke();
+            EventManager.OnVictoryEvent.Invoke();
+        }
+        else if(players.Count <= 0)
+        {
+            EventManager.OnBattleEndEvent.Invoke();
+            EventManager.OnGameOverEvent.Invoke();
         }
     }
 }

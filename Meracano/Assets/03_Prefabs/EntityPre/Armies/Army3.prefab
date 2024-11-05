@@ -329,6 +329,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdf77a30514e8040926da6680fc35c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _detectRange: 1
 --- !u!1 &5535113694018605372
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,10 +411,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d279cbe1ec1fb2c4286563b50752a2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
   TargetLayer:
     serializedVersion: 2
     m_Bits: 128
   IsBattle: 0
+  DoAttack: 0
   <Stat>k__BackingField: {fileID: 11400000, guid: 9aacba599253d4b4786a1e990d6b90f5, type: 2}
 --- !u!212 &1010127231702411937
 SpriteRenderer:
@@ -525,7 +531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a95f111f9f824744b7700f2406ad7eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoAttack: 0
 --- !u!114 &5456578626182166093
 MonoBehaviour:
   m_ObjectHideFlags: 0
