@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
-public class BattleManager : MonoBehaviour
+public class BattleManager : MonoSingleton<BattleManager>
 {
-    private List<Entity> players = new List<Entity>();
-    private List<Entity> enemies = new List<Entity>();
+    [SerializeField] private List<Entity> players = new List<Entity>();
+    [SerializeField] private List<Entity> enemies = new List<Entity>();
 
     public void AddList(Entity entity, bool isArmy)
     {

@@ -12,14 +12,21 @@ public class PlayerDead : MonoBehaviour, IPlayerComponent
         _player = player;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         _player.HealthCompo.OnDead += OnDeadHandler;
+    }
+
+    private void OnDisable()
+    {
+        _player.HealthCompo.OnDead -= OnDeadHandler;
     }
 
     private void OnDeadHandler()
     {
         //Á×À½ Ã³¸®
         Debug.Log(gameObject.name + "´Â »ç¸ÁÇß´Ù.");
+
+        PoolManager.Instance.Push(_player);
     }
 }

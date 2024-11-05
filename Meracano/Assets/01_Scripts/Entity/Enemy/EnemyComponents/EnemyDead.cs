@@ -12,9 +12,14 @@ public class EnemyDead : MonoBehaviour, IEnemyComponent
         _enemy = enemy;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         _enemy.HealthCompo.OnDead += OnDeadHandler;
+    }
+
+    private void OnDisable()
+    {
+        _enemy.HealthCompo.OnDead -= OnDeadHandler;
     }
 
     private void OnDeadHandler()
@@ -22,6 +27,6 @@ public class EnemyDead : MonoBehaviour, IEnemyComponent
         //Á×À½ Ã³¸®
         Debug.Log(gameObject.name + "´Â »ç¸ÁÇß´Ù.");
 
-        Destroy(gameObject);
+        PoolManager.Instance.Push(_enemy);
     }
 }

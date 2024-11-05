@@ -10,6 +10,7 @@ public abstract class Player : Entity
 {
     public ArmyStateMachine StateMachine { get; private set; }
     private Dictionary<Type, IPlayerComponent> _components;
+    private bool _isAddedToBattle = false;
 
     protected override void Awake()
     {
@@ -26,11 +27,14 @@ public abstract class Player : Entity
     private void OnEnable()
     {
         EventManager.OnBattleStartEvent += OnBattleStartEventHandler;
+        EventManager.OnBattleEndEvent += OnBattleEndEventHandler;
     }
+
 
     private void OnDisable()
     {
         EventManager.OnBattleStartEvent -= OnBattleStartEventHandler;
+        EventManager.OnBattleEndEvent -= OnBattleEndEventHandler;
     }
 
     private void Update()
@@ -42,6 +46,23 @@ public abstract class Player : Entity
     private void OnBattleStartEventHandler()
     {
         IsBattle = true;
+
+        // 전투 시작 시에만 리스트에 추가
+        if (!_isAddedToBattle)
+        {
+            BattleManager.Instance.AddList(this, true);
+            _isAddedToBattle = true;
+        }
+    }
+
+    private void OnBattleEndEventHandler()
+    {
+        IsBattle = false;
+        
+        if(_isAddedToBattle)
+        {
+            _isAddedToBattle = false;
+        }
     }
 
     public T GetCompo<T>() where T : class
