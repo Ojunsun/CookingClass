@@ -46,6 +46,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     {
         if(enemies.Count <= 0)
         {
+            FindPlayerPosition();
             EventManager.OnBattleEndEvent?.Invoke();
             EventManager.OnVictoryEvent?.Invoke();
         }
@@ -54,5 +55,10 @@ public class BattleManager : MonoSingleton<BattleManager>
             EventManager.OnBattleEndEvent?.Invoke();
             EventManager.OnGameOverEvent?.Invoke();
         }
+    }
+
+    public void FindPlayerPosition()
+    {
+        players.ForEach(p => p.SetTransform(p.transform.parent));
     }
 }

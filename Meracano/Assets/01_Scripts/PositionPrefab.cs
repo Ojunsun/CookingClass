@@ -9,6 +9,8 @@ public class PositionPrefab : PoolableMono
     private SpriteRenderer sr;
     private SpriteRenderer backGroundSr;
 
+    public Entity PositionEntity { get; private set; }
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();

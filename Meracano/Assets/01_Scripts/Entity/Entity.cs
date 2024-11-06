@@ -70,5 +70,6 @@ public class Entity : PoolableMono
     {
         transform.SetParent(parent);
         transform.localPosition = Vector3.zero;
+        transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 }
