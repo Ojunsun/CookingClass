@@ -53,6 +53,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 
     public void SpawnPlayer()
     {
+        Debug.Log("»ý¼ºµÊ");
         PositionPrefab closestPositionPref = FindClosestPosition();
 
         if(closestPositionPref == null)

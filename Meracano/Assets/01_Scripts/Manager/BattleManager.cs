@@ -46,15 +46,33 @@ public class BattleManager : MonoSingleton<BattleManager>
     {
         if(enemies.Count <= 0)
         {
-            FindPlayerPosition();
-            EventManager.OnBattleEndEvent?.Invoke();
-            EventManager.OnVictoryEvent?.Invoke();
+            StartCoroutine(BattleWin());
         }
         else if(players.Count <= 0)
         {
-            EventManager.OnBattleEndEvent?.Invoke();
-            EventManager.OnGameOverEvent?.Invoke();
+            StartCoroutine(BattleLose());
         }
+    }
+
+    IEnumerator BattleWin()
+    {
+        players.ForEach(p => p.IsBattle = false);
+
+        yield return new WaitForSeconds(1f);
+
+        EventManager.OnBattleEndEvent?.Invoke();
+        EventManager.OnVictoryEvent?.Invoke();
+        FindPlayerPosition();
+    }
+
+    IEnumerator BattleLose()
+    {
+        enemies.ForEach(e => e.IsBattle = false);
+
+        yield return new WaitForSeconds(1f);
+
+        EventManager.OnBattleEndEvent?.Invoke();
+        EventManager.OnGameOverEvent?.Invoke();
     }
 
     public void FindPlayerPosition()

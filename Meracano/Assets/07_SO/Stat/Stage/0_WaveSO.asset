@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StageList:
   - {fileID: 11400000, guid: b1a2aa9829ff3fd45a9abf8d5a940816, type: 2}
+  - {fileID: 11400000, guid: ae13abeba0d9f1f4082402457cf757fd, type: 2}

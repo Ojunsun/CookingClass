@@ -10,7 +10,6 @@ public abstract class Player : Entity
 {
     public ArmyStateMachine StateMachine { get; private set; }
     private Dictionary<Type, IPlayerComponent> _components;
-    private bool _isAddedToBattle = false;
 
     protected override void Awake()
     {
@@ -48,10 +47,10 @@ public abstract class Player : Entity
         IsBattle = true;
 
         // 전투 시작 시에만 리스트에 추가
-        if (!_isAddedToBattle)
+        if (!IsAddedToBattle)
         {
             BattleManager.Instance.AddList(this, true);
-            _isAddedToBattle = true;
+            IsAddedToBattle = true;
         }
     }
 
@@ -59,9 +58,9 @@ public abstract class Player : Entity
     {
         IsBattle = false;
         
-        if(_isAddedToBattle)
+        if(IsAddedToBattle)
         {
-            _isAddedToBattle = false;
+            IsAddedToBattle = false;
         }
     }
 

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DragManager : MonoSingleton<DragManager>
@@ -10,9 +12,21 @@ public class DragManager : MonoSingleton<DragManager>
     private PositionPrefab firstPointedPosition;
     private PositionPrefab currentPointedPosition;
 
+    private bool playingGame = false;
+
+    private void Start()
+    {
+        EventManager.OnBattleStartEvent += OnPlayGameHandler;
+    }
+
+    private void OnPlayGameHandler()
+    {
+        playingGame = true;
+    }
+
     private void Update()
     {
-        CheckPositionPref();// OnBattleEndEvent 실행되면 이게 계속 실행되어야 함
+        if(playingGame) { return; }
         HandleMouseInput();
     }
 
@@ -111,7 +125,8 @@ public class DragManager : MonoSingleton<DragManager>
     }
 
     private void DragPlayer()
-    {   
+    {
+        CheckPositionPref();
         draggedPlayer.transform.position = CheckMousePosition();
     }
 
@@ -121,6 +136,9 @@ public class DragManager : MonoSingleton<DragManager>
 
         isDragging = false;
         draggedPlayer = null;
+
+        currentPointedPosition?.MouseExit();
+        currentPointedPosition = null;
 
         SpawnManager.Instance.ResetDrag();
     }

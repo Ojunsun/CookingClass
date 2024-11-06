@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     {
         Width = SpawnManager.Instance.Width;
         space = SpawnManager.Instance.Space;
+        EventManager.OnVictoryEvent += OnVictoryEventHandler;
 
         SetEnemy();
     }
@@ -26,6 +28,13 @@ public class WaveManager : MonoSingleton<WaveManager>
     {
         Debug.Log("실행");
         EventManager.OnBattleStartEvent?.Invoke();
+    }
+
+    private void OnVictoryEventHandler()
+    {
+        ++currentWaveCnt;
+
+        SetEnemy();
     }
 
     // BattleEnd 되면 실행

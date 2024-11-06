@@ -8,9 +8,11 @@ public class Entity : PoolableMono
 {
     public Entity Target;
     public LayerMask TargetLayer;
+
     public bool IsBattle = false;
     public bool DoAttack = false;
     public bool IsDead = false;
+    public bool IsAddedToBattle = false;
 
     private float speed = 5;
 
@@ -34,8 +36,17 @@ public class Entity : PoolableMono
         HealthCompo?.SetMaxHealth(Stat.MaxHP);
 
         _targetColliders = new Collider2D[_maxDetectEnemy];
+
+        EventManager.OnBattleEndEvent += OnSettingHandler;
     }
 
+    private void OnSettingHandler()
+    {
+        IsBattle = false;
+        DoAttack = false;
+        IsAddedToBattle = false;
+    }
+    
     public T FindNearestTarget<T>(float checkRange, LayerMask mask) where T : Entity
     {
         T target = null;
@@ -63,7 +74,8 @@ public class Entity : PoolableMono
 
     public override void Init()
     {
-
+        HealthCompo.SetMaxHealth(Stat.MaxHP);
+        IsDead = false; 
     }
 
     public void SetTransform(Transform parent)
