@@ -7,6 +7,7 @@ public class VictoryUI : PopupUI
 {
     public override void Awake()
     {
+        base.Awake();
         EventManager.OnVictoryEvent += OnVictoryUIHandler;
     }
 
