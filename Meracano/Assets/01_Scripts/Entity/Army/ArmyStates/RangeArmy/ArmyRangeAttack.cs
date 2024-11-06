@@ -22,7 +22,7 @@ public class ArmyRangeAttack : ArmyState
     {
         base.UpdateState();
 
-        if (_army.Target == null)
+        if (_army.Target.IsDead)
         {
             _stateMachine.ChangeState(_army.GetState(ArmyRangeState.Idle));
         }

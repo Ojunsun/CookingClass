@@ -26,6 +26,7 @@ public class EnemyDead : MonoBehaviour, IEnemyComponent
     {
         //Á×À½ Ã³¸®
         Debug.Log(gameObject.name + "´Â »ç¸ÁÇß´Ù.");
+        _enemy.IsDead = true;
 
         PoolManager.Instance.Push(_enemy);
     }

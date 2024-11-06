@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,7 @@ public class Entity : PoolableMono
     public LayerMask TargetLayer;
     public bool IsBattle = false;
     public bool DoAttack = false;
+    public bool IsDead = false;
 
     private float speed = 5;
 

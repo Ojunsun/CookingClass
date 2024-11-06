@@ -18,7 +18,7 @@ public class ArmyMeleeAttack : ArmyState
     {
         base.UpdateState();
 
-        if(_army.Target == null)
+        if(_army.Target.IsDead)
         {
             _army.DoAttack = false;
             _stateMachine.ChangeState(_army.GetState(ArmyMeleeState.Idle));

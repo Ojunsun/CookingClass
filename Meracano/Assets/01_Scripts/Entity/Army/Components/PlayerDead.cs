@@ -26,6 +26,7 @@ public class PlayerDead : MonoBehaviour, IPlayerComponent
     {
         //Á×À½ Ã³¸®
         Debug.Log(gameObject.name + "´Â »ç¸ÁÇß´Ù.");
+        _player.IsDead = true;
 
         PoolManager.Instance.Push(_player);
     }

@@ -17,10 +17,10 @@ public class EnemyMeleeAttack : EnemyState
     public override void UpdateState()
     {
         base.UpdateState();
-        if (_enemy.Target == null)
+        if (_enemy.Target.IsDead)
         {
             _enemy.DoAttack = false;
-            _stateMachine.ChangeState(_enemy.GetState(ArmyMeleeState.Move));
+            _stateMachine.ChangeState(_enemy.GetState(ArmyMeleeState.Idle));
         }
     }
 
