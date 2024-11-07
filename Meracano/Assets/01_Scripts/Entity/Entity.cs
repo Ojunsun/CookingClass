@@ -44,7 +44,6 @@ public class Entity : PoolableMono
     {
         IsBattle = false;
         DoAttack = false;
-        IsAddedToBattle = false;
     }
     
     public T FindNearestTarget<T>(float checkRange, LayerMask mask) where T : Entity
@@ -75,7 +74,8 @@ public class Entity : PoolableMono
     public override void Init()
     {
         HealthCompo.SetMaxHealth(Stat.MaxHP);
-        IsDead = false; 
+        IsDead = false;
+        IsAddedToBattle = false;
     }
 
     public void SetTransform(Transform parent)

@@ -15,13 +15,15 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     public float StartPosY { get; private set; } = 3.9f;
 
+    private List<PositionPrefab> enemyPositionList = new List<PositionPrefab>();
+
     private void Start()
     {
         Width = SpawnManager.Instance.Width;
         space = SpawnManager.Instance.Space;
         EventManager.OnVictoryEvent += OnVictoryEventHandler;
 
-        SetEnemy();
+        SetEnemyPosition();
     }
 
     public void BattleStartEventHandler() //버튼 이벤트 실행시 사용될 함수
@@ -31,21 +33,14 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     private void OnVictoryEventHandler()
     {
-        ++currentWaveCnt;
-
+        currentWaveCnt++;
         SetEnemy();
     }
 
     // BattleEnd 되면 실행
-    public void SetEnemy()
+    public void SetEnemyPosition()
     {
         float startPosX = (Width - 1) * -space / 2;
-        Dictionary<(int x, int y), Enemy> findEnemyDictionary = new Dictionary<(int, int), Enemy>();
-
-        Waves.StageList[currentWaveCnt].EnemyList.ForEach(e =>
-        {
-            findEnemyDictionary[(e.x, e.y)] = e.enemyPref;
-        });
 
         for (int y = 0; y < Height; ++y)
         {
@@ -54,11 +49,34 @@ public class WaveManager : MonoSingleton<WaveManager>
                 PositionPrefab positionPrefab = PoolManager.Instance.Pop("EnemyPosition") as PositionPrefab;
                 positionPrefab.SetTransform(startPosX + x * space, StartPosY - y * space);
 
+                enemyPositionList.Add(positionPrefab);
+            }
+        }
+
+        SetEnemy();
+    }
+
+    public void SetEnemy()
+    {
+        Dictionary<(int x, int y), Enemy> findEnemyDictionary = new Dictionary<(int, int), Enemy>();
+        Waves.StageList[currentWaveCnt].EnemyList.ForEach(e =>
+        {
+            findEnemyDictionary[(e.x, e.y)] = e.enemyPref;
+        });
+
+        int cnt = 0;
+
+        for (int y = 0; y < Height; ++y)
+        {
+            for (int x = 0; x < Width; ++x)
+            {
                 if (findEnemyDictionary.TryGetValue((x, y), out Enemy findEnemy))
                 {
                     Enemy enemy = PoolManager.Instance.Pop($"{findEnemy.name}") as Enemy;
-                    positionPrefab.SetEntity(enemy);
+                    enemyPositionList[cnt].SetEntity(enemy);
                 }
+
+                cnt++;
             }
         }
     }

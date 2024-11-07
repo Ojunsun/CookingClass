@@ -9,6 +9,8 @@ public class BattleManager : MonoSingleton<BattleManager>
     [SerializeField] private List<Entity> players = new List<Entity>();
     [SerializeField] private List<Entity> enemies = new List<Entity>();
 
+    private Dictionary<Entity, Action> onDeadSubscriptions = new Dictionary<Entity, Action>();
+
     public void AddList(Entity entity, bool isArmy)
     {
         if(isArmy)
@@ -21,36 +23,41 @@ public class BattleManager : MonoSingleton<BattleManager>
         }
 
         Health health = entity.GetComponent<Health>();
-        
-        if(health != null )
+
+        if (health != null)
         {
-            health.OnDead += () => RemoveList(entity, isArmy);
+            Action onDeadAction = () => RemoveList(entity, isArmy);
+            health.OnDead += onDeadAction;
+            onDeadSubscriptions[entity] = onDeadAction;  
         }
     }
 
     public void RemoveList(Entity entity, bool isArmy)
     {
-        if(isArmy)
+        // 구독 해제 로직
+        if (onDeadSubscriptions.TryGetValue(entity, out Action onDeadAction))
+        {
+            Health health = entity.GetComponent<Health>();
+            if (health != null)
+            {
+                health.OnDead -= onDeadAction; // 이벤트 구독 해제
+            }
+            onDeadSubscriptions.Remove(entity); // 딕셔너리에서 삭제
+        }
+
+        if (isArmy)
         {
             players.Remove(entity);
+
+            if (players.Count <= 0)
+                StartCoroutine(BattleLose());
         }
         else
         {
             enemies.Remove(entity);
-        }
 
-        CheckBattleEnd();
-    }
-
-    private void CheckBattleEnd()
-    {
-        if(enemies.Count <= 0)
-        {
-            StartCoroutine(BattleWin());
-        }
-        else if(players.Count <= 0)
-        {
-            StartCoroutine(BattleLose());
+            if (enemies.Count <= 0)
+                StartCoroutine(BattleWin());
         }
     }
 

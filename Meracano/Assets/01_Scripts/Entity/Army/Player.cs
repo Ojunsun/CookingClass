@@ -57,11 +57,6 @@ public abstract class Player : Entity
     private void OnBattleEndEventHandler()
     {
         IsBattle = false;
-        
-        if(IsAddedToBattle)
-        {
-            IsAddedToBattle = false;
-        }
     }
 
     public T GetCompo<T>() where T : class
