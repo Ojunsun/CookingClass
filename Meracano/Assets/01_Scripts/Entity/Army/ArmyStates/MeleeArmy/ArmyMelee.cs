@@ -29,6 +29,12 @@ public class ArmyMelee : Player
         StateMachine.Initialize(stateDictionary[ArmyMeleeState.Idle]);
     }
 
+    public override void Init()
+    {
+        base.Init();
+        StateMachine.Initialize(stateDictionary[ArmyMeleeState.Idle]);
+    }
+
     public override ArmyState GetState(Enum enumType)
     {
         var state = (ArmyMeleeState)enumType;

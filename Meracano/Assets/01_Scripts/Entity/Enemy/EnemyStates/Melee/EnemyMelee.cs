@@ -30,6 +30,13 @@ public class EnemyMelee : Enemy
         StateMachine.Initialize(stateDictionary[EnemyMeleeState.Idle]);
     }
 
+    public override void Init()
+    {
+        base.Init();
+
+        StateMachine.Initialize(stateDictionary[EnemyMeleeState.Idle]);
+    }
+
     public override EnemyState GetState(Enum enumType)
     {
         var state = (EnemyMeleeState)enumType;
