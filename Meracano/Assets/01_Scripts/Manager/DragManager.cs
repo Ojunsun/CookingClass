@@ -24,6 +24,11 @@ public class DragManager : MonoSingleton<DragManager>
         playingGame = true;
     }
 
+    public void OnDragGameHandler()
+    {
+        playingGame = false;
+    }
+
     private void Update()
     {
         if(playingGame) { return; }
