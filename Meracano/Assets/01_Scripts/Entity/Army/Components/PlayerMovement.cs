@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerComponent
         else
         {
             transform.position = Vector2.MoveTowards(transform.position, _targetTrm.position, _player.Stat.MoveSpeed * Time.deltaTime);
+            _player.DoAttack = false;
         }
     }
 

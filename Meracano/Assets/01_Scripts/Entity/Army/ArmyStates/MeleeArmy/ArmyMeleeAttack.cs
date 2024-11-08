@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class ArmyMeleeAttack : ArmyState
 {
+    PlayerMovement _movementCompo;
+
     public ArmyMeleeAttack(Player army, ArmyStateMachine stateMachine, string animBoolName) : base(army, stateMachine, animBoolName)
     {
+        _movementCompo = _army.GetCompo<PlayerMovement>();
     }
 
     public override void Enter()
@@ -18,9 +21,10 @@ public class ArmyMeleeAttack : ArmyState
     {
         base.UpdateState();
 
-        if (_army.Target.IsDead)
+        _movementCompo.LookTarget(_army.Target.transform);
+
+        if (_army.Target.IsDead || !_army.DoAttack)
         {
-            Debug.Log("½ÇÇà");
             _army.DoAttack = false;
             _stateMachine.ChangeState(_army.GetState(ArmyMeleeState.Idle));
         }

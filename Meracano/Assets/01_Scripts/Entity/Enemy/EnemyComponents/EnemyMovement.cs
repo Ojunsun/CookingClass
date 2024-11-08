@@ -30,6 +30,7 @@ public class EnemyMovement : MonoBehaviour, IEnemyComponent
         }
         else
         {
+            _enemy.DoAttack = false;
             transform.position = Vector2.MoveTowards(transform.position, _targetPos.position, _enemy.Stat.MoveSpeed * Time.deltaTime);
         }
     }

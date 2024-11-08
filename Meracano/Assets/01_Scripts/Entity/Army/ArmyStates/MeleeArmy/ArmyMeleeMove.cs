@@ -20,22 +20,21 @@ public class ArmyMeleeMove : ArmyState
     public override void UpdateState()
     {
         base.UpdateState();
-        
-        if(_army.IsBattle)
+
+        if (_army.IsBattle)
         {
             _movementCompo.MoveToTargetPos(_army.Target.transform);
             _movementCompo.LookTarget(_army.Target.transform);
         }
 
-
-        if(_army.DoAttack)
+        if (_army.DoAttack)
         {
             _stateMachine.ChangeState(_army.GetState(ArmyMeleeState.Attack));
         }
     }
 
-    public override void Exit() 
-    { 
+    public override void Exit()
+    {
         base.Exit();
     }
 }

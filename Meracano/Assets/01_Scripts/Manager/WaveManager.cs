@@ -34,7 +34,6 @@ public class WaveManager : MonoSingleton<WaveManager>
     private void OnVictoryEventHandler()
     {
         currentWaveCnt++;
-        SetEnemy();
     }
 
     // BattleEnd 되면 실행

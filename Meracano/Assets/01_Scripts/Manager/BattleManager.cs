@@ -69,7 +69,6 @@ public class BattleManager : MonoSingleton<BattleManager>
 
         EventManager.OnBattleEndEvent?.Invoke();
         EventManager.OnVictoryEvent?.Invoke();
-        FindPlayerPosition();
     }
 
     IEnumerator BattleLose()
