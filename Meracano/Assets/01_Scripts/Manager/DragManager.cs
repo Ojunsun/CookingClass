@@ -69,7 +69,7 @@ public class DragManager : MonoSingleton<DragManager>
 
         Collider2D[] colliders = Physics2D.OverlapPointAll(CheckMousePosition());
 
-        foreach (var col in colliders)
+        foreach (var col in colliders) // 3개 감지 posi playr drag 
         {
             if(col.TryGetComponent<Player>(out Player mergePlayer)) // 무조건 draggedplayer가 감지가 됨
             {
@@ -77,9 +77,10 @@ public class DragManager : MonoSingleton<DragManager>
                 {
                     SpawnManager.Instance.MergePlayer(draggedPlayer, mergePlayer, firstPointedPosition, currentPointedPosition);
                 }
-                else
+                else // drag == drag
                 {
-                    currentPointedPosition?.SetEntity(draggedPlayer);
+                    if (currentPointedPosition == null) firstPointedPosition.SetEntity(draggedPlayer);
+                    else currentPointedPosition.SetEntity(draggedPlayer);
                 }
             }
         }
@@ -103,7 +104,7 @@ public class DragManager : MonoSingleton<DragManager>
         {
             if (col.TryGetComponent<PositionPrefab>(out PositionPrefab pointedPos))
             {
-                if (currentPointedPosition == pointedPos) return;
+                if (currentPointedPosition == pointedPos || !pointedPos.IsPlayerPos) return;
 
                 pointedPos.MouseEnter();
                 currentPointedPosition?.MouseExit();
